@@ -6,7 +6,6 @@
     <title>🎰 Welvura Casino - Игры на реальные деньги</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Все существующие стили остаются БЕЗ ИЗМЕНЕНИЙ */
         * {
             margin: 0;
             padding: 0;
@@ -44,7 +43,7 @@
             padding: 15px;
         }
 
-        /* Все остальные стили остаются БЕЗ ИЗМЕНЕНИЙ */
+        /* Панели авторизации */
         .auth-panel {
             background: var(--card-bg);
             border-radius: 20px;
@@ -127,6 +126,7 @@
             text-decoration: underline;
         }
 
+        /* Шапка */
         .header {
             background: linear-gradient(135deg, var(--card-bg), #252c3a);
             border-radius: 20px;
@@ -218,6 +218,7 @@
             margin-top: 3px;
         }
 
+        /* Меню игр */
         .games-menu {
             background: var(--card-bg);
             border-radius: 20px;
@@ -290,6 +291,7 @@
             opacity: 0.8;
         }
 
+        /* Панель ставки */
         .bet-panel {
             background: var(--card-bg);
             border-radius: 20px;
@@ -368,6 +370,7 @@
             gap: 10px;
         }
 
+        /* Игровая область */
         .game-area {
             background: var(--card-bg);
             border-radius: 20px;
@@ -389,6 +392,7 @@
             to { opacity: 1; }
         }
 
+        /* DICE игра */
         .chance-control {
             background: rgba(44, 62, 80, 0.5);
             border-radius: 15px;
@@ -527,6 +531,7 @@
             color: white;
         }
 
+        /* MINES игра */
         .mines-control {
             background: rgba(44, 62, 80, 0.5);
             border-radius: 15px;
@@ -639,6 +644,7 @@
             color: white;
         }
 
+        /* CRASH игра - ОБНОВЛЕНО С ЛИНИЕЙ 45 ГРАДУСОВ */
         .crash-graph {
             background: rgba(30, 36, 46, 0.7);
             border-radius: 15px;
@@ -655,15 +661,16 @@
             position: relative;
         }
 
-        .graph-line {
+        .graph-line-45 {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 2px;
-            background: var(--accent-green);
+            background: linear-gradient(90deg, var(--accent-green), transparent);
             transform-origin: left;
-            transition: height 0.1s linear;
+            transform: rotate(45deg);
+            transition: transform 0.1s linear;
         }
 
         .crash-point {
@@ -685,7 +692,47 @@
             text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
         }
 
-        /* DOUBLE игра - ДОБАВЛЕНЫ НОВЫЕ СТИЛИ ДЛЯ ОНЛАЙН */
+        /* Онлайн статистика для CRASH */
+        .crash-online-stats {
+            background: rgba(44, 62, 80, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .crash-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .crash-stat-item {
+            background: rgba(52, 73, 94, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .crash-stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .crash-stat-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-yellow);
+        }
+
+        .crash-players-list {
+            max-height: 100px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        /* DOUBLE игра - онлайн статистика */
         .online-stats {
             background: rgba(44, 62, 80, 0.5);
             border-radius: 15px;
@@ -830,7 +877,7 @@
             color: #2c3e50;
         }
 
-        /* ЧАТ - НОВЫЙ БЛОК */
+        /* ЧАТ */
         .chat-panel {
             position: fixed;
             bottom: 0;
@@ -968,7 +1015,7 @@
             transform: translateY(-2px);
         }
 
-        /* Кнопка чата в навигации */
+        /* Кнопка чата */
         .chat-toggle-btn {
             position: fixed;
             bottom: 20px;
@@ -1751,8 +1798,8 @@
             <div class="section-title">ВХОД В КАЗИНО WELVURA</div>
             
             <div class="auth-form" id="loginForm">
-                <input type="text" class="auth-input" id="loginUsername" placeholder="ЛОГИН">
-                <input type="password" class="auth-input" id="loginPassword" placeholder="ПАРОЛЬ">
+                <input type="text" class="auth-input" id="loginUsername" placeholder="ЛОГИН" value="admin">
+                <input type="password" class="auth-input" id="loginPassword" placeholder="ПАРОЛЬ" value="wowfanta">
                 <button class="auth-btn btn-login" id="loginBtn">
                     <i class="fas fa-sign-in-alt"></i> ВОЙТИ
                 </button>
@@ -2010,8 +2057,30 @@
                 </div>
             </div>
 
-            <!-- CRASH -->
+            <!-- CRASH с онлайн статистикой -->
             <div class="game-content" id="crashGame" style="display: none;">
+                <!-- Онлайн статистика CRASH -->
+                <div class="crash-online-stats">
+                    <div class="stats-title">ОНЛАЙН СТАВКИ</div>
+                    <div class="crash-stats-grid">
+                        <div class="crash-stat-item">
+                            <div class="crash-stat-label">Игроков в игре</div>
+                            <div class="crash-stat-value" id="crashPlayersCount">0</div>
+                        </div>
+                        <div class="crash-stat-item">
+                            <div class="crash-stat-label">Общая ставка</div>
+                            <div class="crash-stat-value" id="crashTotalBet">0 ₽</div>
+                        </div>
+                        <div class="crash-stat-item">
+                            <div class="crash-stat-label">Выигрыш</div>
+                            <div class="crash-stat-value" id="crashTotalWin">0 ₽</div>
+                        </div>
+                    </div>
+                    <div class="crash-players-list" id="crashPlayersList">
+                        <!-- Игроки в CRASH будут здесь -->
+                    </div>
+                </div>
+
                 <div class="multiplier-display">
                     <div class="multiplier-label">ТЕКУЩИЙ МНОЖИТЕЛЬ</div>
                     <div class="multiplier-value" id="crashMultiplier">x1.00</div>
@@ -2021,7 +2090,7 @@
                 <div class="crash-graph">
                     <div class="graph-container" id="crashGraph">
                         <div class="current-multiplier" id="crashCurrentMultiplier">x1.00</div>
-                        <!-- График будет отрисован JavaScript -->
+                        <!-- График с линией 45 градусов -->
                     </div>
                 </div>
 
@@ -2131,7 +2200,7 @@
         </div>
     </div>
 
-    <!-- Чат -->
+    <!-- ЧАТ -->
     <div class="chat-panel" id="chatPanel">
         <div class="chat-header">
             <div class="chat-title">
@@ -2155,120 +2224,215 @@
         <div class="chat-badge" id="chatBadge" style="display: none;">0</div>
     </button>
 
-    <!-- Модальные окна -->
-    <div class="modal-overlay" id="editUserModal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">
-                    <i class="fas fa-user-edit"></i>
-                    Редактирование пользователя
-                </div>
-                <button class="modal-close" id="closeEditModal">&times;</button>
-            </div>
-            <div class="modal-content">
-                <div class="form-group">
-                    <label class="form-label">Логин:</label>
-                    <input type="text" class="form-input" id="editUsername" disabled>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Баланс:</label>
-                    <input type="number" class="form-input" id="editBalance" min="0" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Роль:</label>
-                    <select class="form-select" id="editRole">
-                        <option value="user">Пользователь</option>
-                        <option value="moder">Модератор</option>
-                        <option value="admin">Администратор</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Статус:</label>
-                    <select class="form-select" id="editStatus">
-                        <option value="active">Активен</option>
-                        <option value="banned">Заблокирован</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button class="modal-btn modal-btn-secondary" id="cancelEditBtn">Отмена</button>
-                <button class="modal-btn modal-btn-primary" id="saveEditBtn">Сохранить</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="banUserModal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">
-                    <i class="fas fa-ban"></i>
-                    Блокировка пользователя
-                </div>
-                <button class="modal-close" id="closeBanModal">&times;</button>
-            </div>
-            <div class="modal-content">
-                <div class="form-group">
-                    <label class="form-label">Выберите пользователя:</label>
-                    <select class="form-select" id="banUserSelect">
-                        <!-- Список пользователей будет загружен здесь -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Причина блокировки:</label>
-                    <select class="form-select" id="banReason">
-                        <option value="cheating">Нарушение правил игры</option>
-                        <option value="spam">Спам в чате</option>
-                        <option value="abuse">Оскорбления</option>
-                        <option value="multiacc">Мультиаккаунт</option>
-                        <option value="other">Другая причина</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Комментарий (необязательно):</label>
-                    <textarea class="form-input" id="banComment" rows="3" placeholder="Дополнительная информация..."></textarea>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button class="modal-btn modal-btn-secondary" id="cancelBanBtn">Отмена</button>
-                <button class="modal-btn modal-btn-danger" id="confirmBanBtn">Заблокировать</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Уведомление -->
-    <div class="notification" id="notification">
-        <div class="notification-icon">🎉</div>
-        <div class="notification-text">Игра начата!</div>
-    </div>
-
     <script>
+        // ========== ИСПРАВЛЕННАЯ БАЗА ДАННЫХ ==========
+        const DB_NAME = 'welvura_casino_db';
+        const DB_VERSION = '2.0';
+        
+        // Инициализация базы данных
+        function initDatabase() {
+            if (!localStorage.getItem(DB_NAME)) {
+                const initialDB = {
+                    version: DB_VERSION,
+                    users: [],
+                    lastUserId: 0,
+                    lastGameId: 0,
+                    systemLogs: [],
+                    adminSettings: {
+                        minBet: 0.01,
+                        maxBet: 1000000,
+                        defaultBalance: 1000.00,
+                        enableRegistration: true
+                    }
+                };
+                
+                // Создаем стандартного администратора
+                const adminUser = {
+                    id: 1,
+                    username: 'admin',
+                    password: 'wowfanta', // Исправлен пароль
+                    role: 'admin',
+                    balance: 100000.00,
+                    registerDate: new Date().toISOString(),
+                    lastLogin: new Date().toISOString(),
+                    status: 'active',
+                    totalGames: 0,
+                    wins: 0,
+                    losses: 0,
+                    gameHistory: []
+                };
+                
+                initialDB.users.push(adminUser);
+                initialDB.lastUserId = 1;
+                
+                // Создаем тестового модератора
+                const moderUser = {
+                    id: 2,
+                    username: 'moder',
+                    password: 'moder123',
+                    role: 'moder',
+                    balance: 5000.00,
+                    registerDate: new Date().toISOString(),
+                    lastLogin: new Date().toISOString(),
+                    status: 'active',
+                    totalGames: 0,
+                    wins: 0,
+                    losses: 0,
+                    gameHistory: []
+                };
+                
+                initialDB.users.push(moderUser);
+                initialDB.lastUserId = 2;
+                
+                // Создаем тестовых пользователей
+                const testUsers = [
+                    { id: 3, username: 'user1', password: '123456', balance: 5000 },
+                    { id: 4, username: 'user2', password: '123456', balance: 3000 },
+                    { id: 5, username: 'user3', password: '123456', balance: 10000 }
+                ];
+                
+                testUsers.forEach(userData => {
+                    const user = {
+                        id: userData.id,
+                        username: userData.username,
+                        password: userData.password,
+                        role: 'user',
+                        balance: userData.balance,
+                        registerDate: new Date().toISOString(),
+                        lastLogin: new Date().toISOString(),
+                        status: 'active',
+                        totalGames: 0,
+                        wins: 0,
+                        losses: 0,
+                        gameHistory: []
+                    };
+                    
+                    initialDB.users.push(user);
+                    initialDB.lastUserId = userData.id;
+                });
+                
+                localStorage.setItem(DB_NAME, JSON.stringify(initialDB));
+                console.log('База данных инициализирована с тестовыми пользователями');
+            } else {
+                console.log('База данных уже существует');
+            }
+        }
+        
+        // Получить базу данных
+        function getDatabase() {
+            const db = localStorage.getItem(DB_NAME);
+            return db ? JSON.parse(db) : null;
+        }
+        
+        // Сохранить базу данных
+        function saveDatabase(db) {
+            localStorage.setItem(DB_NAME, JSON.stringify(db));
+        }
+        
+        // Найти пользователя по логину
+        function findUserByUsername(username) {
+            const db = getDatabase();
+            if (!db || !db.users) return null;
+            
+            return db.users.find(user => user.username.toLowerCase() === username.toLowerCase());
+        }
+        
+        // Найти пользователя по ID
+        function findUserById(userId) {
+            const db = getDatabase();
+            if (!db || !db.users) return null;
+            
+            return db.users.find(user => user.id === userId);
+        }
+        
+        // Создать нового пользователя
+        function createUser(username, password) {
+            const db = getDatabase();
+            if (!db) return null;
+            
+            // Проверяем, существует ли пользователь
+            if (findUserByUsername(username)) {
+                return null;
+            }
+            
+            // Создаем нового пользователя
+            const newUserId = db.lastUserId + 1;
+            const newUser = {
+                id: newUserId,
+                username: username,
+                password: password,
+                role: 'user',
+                balance: db.adminSettings.defaultBalance || 1000.00,
+                registerDate: new Date().toISOString(),
+                lastLogin: new Date().toISOString(),
+                status: 'active',
+                totalGames: 0,
+                wins: 0,
+                losses: 0,
+                gameHistory: []
+            };
+            
+            db.users.push(newUser);
+            db.lastUserId = newUserId;
+            
+            saveDatabase(db);
+            
+            return newUser;
+        }
+        
+        // Обновить данные пользователя
+        function updateUser(user) {
+            const db = getDatabase();
+            if (!db || !db.users) return false;
+            
+            const userIndex = db.users.findIndex(u => u.id === user.id);
+            if (userIndex === -1) return false;
+            
+            db.users[userIndex] = user;
+            saveDatabase(db);
+            return true;
+        }
+        
+        // Получить всех пользователей
+        function getAllUsers() {
+            const db = getDatabase();
+            return db ? db.users : [];
+        }
+        
+        // Сохранить текущего пользователя в сессии
+        function setCurrentUser(user) {
+            if (user) {
+                localStorage.setItem('current_user', JSON.stringify(user));
+            } else {
+                localStorage.removeItem('current_user');
+            }
+        }
+        
+        // Получить текущего пользователя из сессии
+        function getCurrentUser() {
+            const userJson = localStorage.getItem('current_user');
+            return userJson ? JSON.parse(userJson) : null;
+        }
+
         // ========== ОНЛАЙН СИСТЕМА ==========
-        const SERVER_URL = 'wss://ws.postman-echo.com/raw'; // WebSocket сервер для демо
-        let ws = null;
-        let onlineUsers = new Map(); // Map: userId -> {username, color, bet, timestamp}
+        let onlineUsers = new Map(); // Map: userId -> {username, game, bet, timestamp}
+        let doubleOnline = new Map(); // Для DOUBLE игры
+        let crashOnline = new Map();  // Для CRASH игры
         let chatMessages = [];
         let unreadMessages = 0;
-        let currentColor = 'green';
-        let currentBet = 10.00;
-        let lastDoubleResult = null;
         
-        // Инициализация WebSocket
-        function initWebSocket() {
-            try {
-                // В реальном приложении здесь должен быть ваш WebSocket сервер
-                // Для демо эмулируем работу через localStorage
-                console.log('Онлайн система инициализирована');
-                
-                // Загружаем онлайн данные из localStorage
-                loadOnlineData();
-                
-                // Эмулируем получение онлайн данных
-                setInterval(updateOnlineStats, 2000);
-                setInterval(simulateOtherPlayers, 5000);
-                
-            } catch (error) {
-                console.error('Ошибка подключения WebSocket:', error);
-            }
+        // Инициализация онлайн системы
+        function initOnlineSystem() {
+            // Загружаем онлайн данные из localStorage
+            loadOnlineData();
+            
+            // Запускаем обновление онлайн статистики
+            setInterval(updateOnlineStats, 2000);
+            
+            // Симулируем других игроков
+            setInterval(simulateOtherPlayers, 5000);
+            
+            console.log('Онлайн система инициализирована');
         }
         
         function loadOnlineData() {
@@ -2277,8 +2441,9 @@
                 try {
                     const data = JSON.parse(savedData);
                     onlineUsers = new Map(data.onlineUsers || []);
+                    doubleOnline = new Map(data.doubleOnline || []);
+                    crashOnline = new Map(data.crashOnline || []);
                     chatMessages = data.chatMessages || [];
-                    lastDoubleResult = data.lastDoubleResult || null;
                     
                     // Обновляем отображение
                     updateOnlineDisplay();
@@ -2292,31 +2457,54 @@
         function saveOnlineData() {
             const data = {
                 onlineUsers: Array.from(onlineUsers.entries()),
-                chatMessages: chatMessages.slice(-50), // Сохраняем последние 50 сообщений
-                lastDoubleResult: lastDoubleResult,
+                doubleOnline: Array.from(doubleOnline.entries()),
+                crashOnline: Array.from(crashOnline.entries()),
+                chatMessages: chatMessages.slice(-50),
                 timestamp: Date.now()
             };
             
             localStorage.setItem('welvura_online_data', JSON.stringify(data));
         }
         
-        function addOnlineUser(userId, username, color, bet) {
-            onlineUsers.set(userId, {
+        // Добавить пользователя в онлайн
+        function addOnlineUser(userId, username, game, bet, extraData = {}) {
+            const userData = {
                 username: username,
-                color: color,
+                game: game,
                 bet: bet,
-                timestamp: Date.now()
-            });
+                timestamp: Date.now(),
+                ...extraData
+            };
             
-            // Очищаем неактивных пользователей (более 30 секунд)
+            onlineUsers.set(userId, userData);
+            
+            // Добавляем в конкретную игру
+            if (game === 'double') {
+                doubleOnline.set(userId, { ...userData, color: extraData.color || 'green' });
+            } else if (game === 'crash') {
+                crashOnline.set(userId, userData);
+            }
+            
+            // Очищаем неактивных пользователей
             cleanupInactiveUsers();
             
             // Обновляем отображение
             updateOnlineDisplay();
             saveOnlineData();
+            
+            return userData;
         }
         
         function removeOnlineUser(userId) {
+            const userData = onlineUsers.get(userId);
+            if (userData) {
+                if (userData.game === 'double') {
+                    doubleOnline.delete(userId);
+                } else if (userData.game === 'crash') {
+                    crashOnline.delete(userId);
+                }
+            }
+            
             onlineUsers.delete(userId);
             updateOnlineDisplay();
             saveOnlineData();
@@ -2328,15 +2516,29 @@
             
             for (const [userId, data] of onlineUsers.entries()) {
                 if (now - data.timestamp > inactiveTime) {
-                    onlineUsers.delete(userId);
+                    removeOnlineUser(userId);
                 }
             }
         }
         
+        // Обновить отображение онлайн статистики
         function updateOnlineDisplay() {
-            if (!document.getElementById('doubleStats') || currentGame !== 'double') return;
+            // Обновляем DOUBLE статистику
+            if (currentGame === 'double' && document.getElementById('doubleStats')) {
+                updateDoubleStats();
+            }
             
-            // Обновляем статистику по цветам
+            // Обновляем CRASH статистику
+            if (currentGame === 'crash' && document.getElementById('crashPlayersCount')) {
+                updateCrashStats();
+            }
+            
+            // Обновляем счетчик онлайн
+            updateOnlineCount();
+        }
+        
+        // Статистика для DOUBLE
+        function updateDoubleStats() {
             const colorStats = {
                 green: { players: 0, amount: 0 },
                 gray: { players: 0, amount: 0 },
@@ -2344,7 +2546,7 @@
                 yellow: { players: 0, amount: 0 }
             };
             
-            for (const userData of onlineUsers.values()) {
+            for (const userData of doubleOnline.values()) {
                 if (userData.color && colorStats[userData.color]) {
                     colorStats[userData.color].players++;
                     colorStats[userData.color].amount += userData.bet || 0;
@@ -2352,32 +2554,30 @@
             }
             
             // Обновляем DOM
-            document.getElementById('greenPlayers').textContent = colorStats.green.players;
-            document.getElementById('greenAmount').textContent = formatMoney(colorStats.green.amount);
-            
-            document.getElementById('grayPlayers').textContent = colorStats.gray.players;
-            document.getElementById('grayAmount').textContent = formatMoney(colorStats.gray.amount);
-            
-            document.getElementById('redPlayers').textContent = colorStats.red.players;
-            document.getElementById('redAmount').textContent = formatMoney(colorStats.red.amount);
-            
-            document.getElementById('yellowPlayers').textContent = colorStats.yellow.players;
-            document.getElementById('yellowAmount').textContent = formatMoney(colorStats.yellow.amount);
-            
-            // Обновляем список игроков
-            updatePlayersList();
-            
-            // Обновляем счетчик онлайн
-            updateOnlineCount();
+            if (document.getElementById('greenPlayers')) {
+                document.getElementById('greenPlayers').textContent = colorStats.green.players;
+                document.getElementById('greenAmount').textContent = formatMoney(colorStats.green.amount);
+                
+                document.getElementById('grayPlayers').textContent = colorStats.gray.players;
+                document.getElementById('grayAmount').textContent = formatMoney(colorStats.gray.amount);
+                
+                document.getElementById('redPlayers').textContent = colorStats.red.players;
+                document.getElementById('redAmount').textContent = formatMoney(colorStats.red.amount);
+                
+                document.getElementById('yellowPlayers').textContent = colorStats.yellow.players;
+                document.getElementById('yellowAmount').textContent = formatMoney(colorStats.yellow.amount);
+                
+                updateDoublePlayersList();
+            }
         }
         
-        function updatePlayersList() {
+        function updateDoublePlayersList() {
             const container = document.getElementById('onlinePlayersList');
             if (!container) return;
             
             container.innerHTML = '';
             
-            const playersArray = Array.from(onlineUsers.entries()).slice(0, 10); // Показываем первые 10
+            const playersArray = Array.from(doubleOnline.entries()).slice(0, 10);
             
             if (playersArray.length === 0) {
                 container.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 10px;">Нет активных игроков</div>';
@@ -2406,13 +2606,62 @@
                 container.appendChild(playerDiv);
             });
             
-            if (onlineUsers.size > 10) {
+            if (doubleOnline.size > 10) {
                 const moreDiv = document.createElement('div');
                 moreDiv.style.textAlign = 'center';
                 moreDiv.style.color = 'var(--text-secondary)';
                 moreDiv.style.fontSize = '11px';
                 moreDiv.style.padding = '5px';
-                moreDiv.textContent = `и еще ${onlineUsers.size - 10} игроков`;
+                moreDiv.textContent = `и еще ${doubleOnline.size - 10} игроков`;
+                container.appendChild(moreDiv);
+            }
+        }
+        
+        // Статистика для CRASH
+        function updateCrashStats() {
+            const container = document.getElementById('crashPlayersList');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            const playersArray = Array.from(crashOnline.entries()).slice(0, 5);
+            
+            // Обновляем общую статистику
+            const totalPlayers = crashOnline.size;
+            const totalBet = Array.from(crashOnline.values()).reduce((sum, user) => sum + (user.bet || 0), 0);
+            const totalWin = totalBet * (crashGame.currentMultiplier || 1);
+            
+            document.getElementById('crashPlayersCount').textContent = totalPlayers;
+            document.getElementById('crashTotalBet').textContent = formatMoney(totalBet);
+            document.getElementById('crashTotalWin').textContent = formatMoney(totalWin);
+            
+            if (playersArray.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 10px;">Нет активных игроков</div>';
+                return;
+            }
+            
+            playersArray.forEach(([userId, data]) => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player-item';
+                
+                playerDiv.innerHTML = `
+                    <div class="player-name">
+                        <span>🚀</span>
+                        ${data.username}
+                    </div>
+                    <div class="player-bet">${formatMoney(data.bet || 0)}</div>
+                `;
+                
+                container.appendChild(playerDiv);
+            });
+            
+            if (crashOnline.size > 5) {
+                const moreDiv = document.createElement('div');
+                moreDiv.style.textAlign = 'center';
+                moreDiv.style.color = 'var(--text-secondary)';
+                moreDiv.style.fontSize = '11px';
+                moreDiv.style.padding = '5px';
+                moreDiv.textContent = `и еще ${crashOnline.size - 5} игроков`;
                 container.appendChild(moreDiv);
             }
         }
@@ -2425,27 +2674,41 @@
         }
         
         function simulateOtherPlayers() {
-            if (currentGame !== 'double' || !currentUser) return;
+            if (!currentUser) return;
             
-            const colors = ['green', 'gray', 'red', 'yellow'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            const randomBet = Math.floor(Math.random() * 1000) + 10;
-            const fakeUserId = 'bot_' + Date.now();
-            
-            addOnlineUser(fakeUserId, 'Игрок' + Math.floor(Math.random() * 1000), randomColor, randomBet);
-            
-            // Через 20-40 секунд удаляем бота
-            setTimeout(() => {
-                removeOnlineUser(fakeUserId);
-            }, 20000 + Math.random() * 20000);
-        }
-        
-        function updateOnlineStats() {
+            // Симулируем игроков для DOUBLE
             if (currentGame === 'double') {
-                updateOnlineDisplay();
+                const colors = ['green', 'gray', 'red', 'yellow'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                const randomBet = Math.floor(Math.random() * 1000) + 10;
+                const fakeUserId = 'bot_' + Date.now();
+                
+                addOnlineUser(fakeUserId, 'Игрок' + Math.floor(Math.random() * 1000), 'double', randomBet, { color: randomColor });
+                
+                setTimeout(() => {
+                    removeOnlineUser(fakeUserId);
+                }, 20000 + Math.random() * 20000);
+            }
+            
+            // Симулируем игроков для CRASH
+            if (currentGame === 'crash' && crashGame.active) {
+                const randomBet = Math.floor(Math.random() * 500) + 10;
+                const fakeUserId = 'crash_bot_' + Date.now();
+                
+                addOnlineUser(fakeUserId, 'Игрок' + Math.floor(Math.random() * 1000), 'crash', randomBet);
+                
+                setTimeout(() => {
+                    removeOnlineUser(fakeUserId);
+                }, 15000 + Math.random() * 15000);
             }
         }
         
+        function updateOnlineStats() {
+            if (currentGame === 'double' || currentGame === 'crash') {
+                updateOnlineDisplay();
+            }
+        }
+
         // ========== ЧАТ СИСТЕМА ==========
         function addChatMessage(username, message, isSystem = false) {
             const chatMessage = {
@@ -2458,15 +2721,12 @@
             
             chatMessages.push(chatMessage);
             
-            // Ограничиваем историю 100 сообщениями
             if (chatMessages.length > 100) {
                 chatMessages = chatMessages.slice(-100);
             }
             
-            // Обновляем отображение
             updateChatDisplay();
             
-            // Увеличиваем счетчик непрочитанных, если чат закрыт
             if (!document.getElementById('chatPanel').classList.contains('active')) {
                 unreadMessages++;
                 updateChatBadge();
@@ -2506,7 +2766,6 @@
                 container.appendChild(messageDiv);
             });
             
-            // Прокручиваем вниз
             container.scrollTop = container.scrollHeight;
         }
         
@@ -2528,7 +2787,6 @@
             
             if (!message || !currentUser) return;
             
-            // Добавляем сообщение
             addChatMessage(currentUser.username, message);
             
             // Симулируем ответы
@@ -2538,16 +2796,373 @@
                 }, 1000);
             }
             
-            // Очищаем поле ввода
             input.value = '';
             input.focus();
         }
+
+        // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+        let currentGame = 'dice';
+        let currentUser = null;
+        let gameHistory = [];
+        let currentBet = 10.00;
+        let chance = 50;
+
+        // Состояние MINES игры
+        let minesGame = {
+            active: false,
+            minesCount: 3,
+            multiplier: 1.0,
+            revealedCells: 0,
+            minesPositions: [],
+            cells: [],
+            initialBet: 10.00,
+            initialMinesCount: 3
+        };
+
+        // Состояние CRASH игры
+        let crashGame = {
+            active: false,
+            crashPoint: 1.0,
+            currentMultiplier: 1.0,
+            cashedOut: false,
+            gameEnded: false,
+            interval: null,
+            points: [],
+            graphLine: null
+        };
+
+        // Состояние DOUBLE игры
+        let doubleGame = {
+            selectedColor: 'green',
+            colors: {
+                green: { name: 'ЗЕЛЕНЫЙ', multiplier: 2.0, chance: 40 },
+                gray: { name: 'СЕРЫЙ', multiplier: 3.0, chance: 30 },
+                red: { name: 'КРАСНЫЙ', multiplier: 5.0, chance: 20 },
+                yellow: { name: 'ЖЕЛТЫЙ', multiplier: 10.0, chance: 10 }
+            }
+        };
+
+        // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
         
-        // ========== ОСТАЛЬНОЙ КОД ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ ==========
-        // Все остальные функции из оригинального файла остаются как есть
-        // Я только добавляю вызовы для онлайн системы в нужных местах
+        function roundToTwo(num) {
+            return Math.round((num + Number.EPSILON) * 100) / 100;
+        }
+
+        function formatMoney(amount) {
+            return roundToTwo(amount).toLocaleString('ru-RU', { 
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2 
+            }) + ' ₽';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
         
-        // В функции loginUser добавляем:
+        function getRoleName(role) {
+            const roles = {
+                'user': 'Пользователь',
+                'moder': 'Модератор',
+                'admin': 'Администратор'
+            };
+            return roles[role] || role;
+        }
+        
+        function getRoleClass(role) {
+            const classes = {
+                'user': 'role-user',
+                'moder': 'role-moder',
+                'admin': 'role-admin'
+            };
+            return classes[role] || 'role-user';
+        }
+        
+        function getUserStatus(user) {
+            if (user.status === 'banned') {
+                return 'Заблокирован';
+            }
+            return 'Активен';
+        }
+
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация базы данных
+            initDatabase();
+            
+            // Проверяем, есть ли сохраненная сессия
+            const savedUser = getCurrentUser();
+            if (savedUser) {
+                // Обновляем данные пользователя из базы
+                const freshUser = findUserById(savedUser.id);
+                if (freshUser) {
+                    loginUser(freshUser);
+                } else {
+                    // Пользователь не найден в базе
+                    setCurrentUser(null);
+                    showAuthPanel();
+                }
+            } else {
+                showAuthPanel();
+            }
+            
+            // Инициализация поля MINES
+            initMinesGrid();
+            
+            // Инициализация онлайн системы
+            initOnlineSystem();
+            
+            // Назначение обработчиков событий
+            setupEventListeners();
+        });
+
+        // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
+        function setupEventListeners() {
+            // Переключение форм авторизации/регистрации
+            document.getElementById('switchToRegister').addEventListener('click', showRegisterForm);
+            document.getElementById('switchToLogin').addEventListener('click', showLoginForm);
+            
+            // Кнопка входа
+            document.getElementById('loginBtn').addEventListener('click', login);
+            document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') login();
+            });
+            
+            // Кнопка регистрации
+            document.getElementById('registerBtn').addEventListener('click', register);
+            document.getElementById('registerConfirmPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') register();
+            });
+            
+            // Кнопка выхода
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+
+            // Выбор игры
+            document.querySelectorAll('.game-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    selectGame(this.dataset.game);
+                });
+            });
+
+            // Быстрые ставки
+            document.querySelectorAll('.quick-bet-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    handleQuickBet(this.dataset.action);
+                });
+            });
+
+            // Кнопки шанса DICE
+            document.querySelectorAll('.chance-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setChance(parseInt(this.dataset.chance));
+                });
+            });
+
+            // Поле ввода шанса
+            document.getElementById('chanceInput').addEventListener('input', function() {
+                setChance(parseFloat(this.value) || 50);
+            });
+
+            // Поле ввода ставки
+            document.getElementById('betInput').addEventListener('input', function() {
+                let value = parseFloat(this.value) || 0.01;
+                value = roundToTwo(value);
+                setBet(value);
+            });
+
+            // Кнопки DICE
+            document.getElementById('diceLessBtn').addEventListener('click', () => playDice('less'));
+            document.getElementById('diceMoreBtn').addEventListener('click', () => playDice('more'));
+
+            // Кнопки MINES
+            document.getElementById('minesMinusBtn').addEventListener('click', () => changeMines(-1));
+            document.getElementById('minesPlusBtn').addEventListener('click', () => changeMines(1));
+            document.getElementById('minesStartBtn').addEventListener('click', startMinesGame);
+            document.getElementById('minesCashoutBtn').addEventListener('click', cashoutMines);
+
+            // Кнопки CRASH
+            document.getElementById('crashStartBtn').addEventListener('click', startCrashGame);
+            document.getElementById('crashCashoutBtn').addEventListener('click', cashoutCrash);
+
+            // Кнопки DOUBLE
+            document.getElementById('doubleSpinBtn').addEventListener('click', playDoubleGame);
+            
+            // Выбор цвета DOUBLE
+            document.querySelectorAll('.color-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    selectColor(this.dataset.color);
+                });
+            });
+
+            // Навигация
+            document.getElementById('navGames').addEventListener('click', () => showSection('games'));
+            document.getElementById('navHistory').addEventListener('click', () => showSection('history'));
+            document.getElementById('navBalance').addEventListener('click', () => showSection('balance'));
+            document.getElementById('navProfile').addEventListener('click', () => showSection('profile'));
+            document.getElementById('navAdmin').addEventListener('click', () => showSection('admin'));
+
+            // Кнопки управления балансом
+            document.getElementById('resetBalanceBtn').addEventListener('click', resetBalance);
+            
+            // Кнопки пополнения баланса
+            document.querySelectorAll('.deposit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const amount = parseFloat(this.dataset.amount);
+                    if (amount > 0) {
+                        depositBalance(amount);
+                    }
+                });
+            });
+
+            // Кнопка кастомного пополнения
+            document.getElementById('customDepositBtn').addEventListener('click', function() {
+                const input = document.getElementById('customDepositInput');
+                const amount = parseFloat(input.value);
+                if (amount > 0) {
+                    depositBalance(amount);
+                    input.value = '';
+                }
+            });
+
+            // Ввод кастомного пополнения
+            document.getElementById('customDepositInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const amount = parseFloat(this.value);
+                    if (amount > 0) {
+                        depositBalance(amount);
+                        this.value = '';
+                    }
+                }
+            });
+
+            // Обработчики чата
+            document.getElementById('chatToggleBtn').addEventListener('click', toggleChat);
+            document.getElementById('chatCloseBtn').addEventListener('click', closeChat);
+            document.getElementById('chatSendBtn').addEventListener('click', sendChatMessage);
+            document.getElementById('chatInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendChatMessage();
+            });
+        }
+
+        // ========== СИСТЕМА АВТОРИЗАЦИИ ==========
+        function showAuthPanel() {
+            document.getElementById('authPanel').classList.add('active');
+            document.getElementById('header').classList.remove('active');
+            document.getElementById('navButtons').classList.remove('active');
+            document.getElementById('gamesMenu').classList.remove('active');
+            document.getElementById('betPanel').classList.remove('active');
+            document.getElementById('gameArea').classList.remove('active');
+            document.getElementById('historyPanel').classList.remove('active');
+            document.getElementById('balanceControlPanel').classList.remove('active');
+            document.getElementById('profilePanel').classList.remove('active');
+            document.getElementById('adminPanel').classList.remove('active');
+            
+            currentUser = null;
+        }
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginUsername').focus();
+        }
+
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('registerUsername').focus();
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            console.log('Попытка входа:', username, password);
+            
+            if (!username || !password) {
+                showNotification('Заполните все поля!', 'error');
+                return;
+            }
+            
+            // Ищем пользователя
+            const user = findUserByUsername(username);
+            console.log('Найден пользователь:', user);
+            
+            if (!user) {
+                showNotification('Пользователь не найден!', 'error');
+                return;
+            }
+            
+            // Проверяем блокировку
+            if (user.status === 'banned') {
+                showNotification('Ваш аккаунт заблокирован!', 'error');
+                return;
+            }
+            
+            if (user.password !== password) {
+                showNotification('Неверный пароль!', 'error');
+                return;
+            }
+            
+            // Обновляем время последнего входа
+            user.lastLogin = new Date().toISOString();
+            updateUser(user);
+            
+            // Входим в систему
+            loginUser(user);
+            
+            showNotification(`Добро пожаловать, ${user.username}!`, 'success');
+        }
+
+        function register() {
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (!username || !password || !confirmPassword) {
+                showNotification('Заполните все поля!', 'error');
+                return;
+            }
+            
+            if (username.length < 3) {
+                showNotification('Логин должен быть не менее 3 символов!', 'error');
+                return;
+            }
+            
+            if (password.length < 4) {
+                showNotification('Пароль должен быть не менее 4 символов!', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification('Пароли не совпадают!', 'error');
+                return;
+            }
+            
+            // Проверяем, существует ли пользователь
+            if (findUserByUsername(username)) {
+                showNotification('Пользователь с таким логином уже существует!', 'error');
+                return;
+            }
+            
+            // Создаем нового пользователя
+            const newUser = createUser(username, password);
+            
+            if (!newUser) {
+                showNotification('Ошибка при создании аккаунта!', 'error');
+                return;
+            }
+            
+            // Входим в систему
+            loginUser(newUser);
+            
+            showNotification(`Аккаунт успешно создан! Добро пожаловать, ${username}!`, 'success');
+            showLoginForm();
+        }
+
         function loginUser(user) {
             currentUser = user;
             setCurrentUser(user);
@@ -2573,20 +3188,16 @@
             updateBalance();
             updateMultipliers();
             
-            // Инициализируем онлайн систему
-            initWebSocket();
+            // Добавляем в онлайн систему
+            addOnlineUser(user.id, user.username, currentGame, currentBet, { color: doubleGame.selectedColor });
             
             // Добавляем системное сообщение в чат
             addChatMessage('Система', `${user.username} присоединился к игре!`, true);
             
-            // Добавляем пользователя в онлайн
-            addOnlineUser(user.id, user.username, currentColor, currentBet);
-            
             // Показываем игры
             showSection('games');
         }
-        
-        // В функции logout добавляем:
+
         function logout() {
             if (confirm('Вы уверены, что хотите выйти из аккаунта?')) {
                 // Удаляем из онлайн
@@ -2595,45 +3206,402 @@
                     addChatMessage('Система', `${currentUser.username} вышел из игры`, true);
                 }
                 
-                // Логируем выход
-                if (currentUser) {
-                    addSystemLog('user_logout', `Пользователь ${currentUser.username} вышел из системы`, currentUser.id);
-                }
-                
                 setCurrentUser(null);
                 currentUser = null;
                 showAuthPanel();
                 showNotification('Вы вышли из аккаунта', 'info');
             }
         }
-        
-        // В функции selectGame добавляем обновление онлайн статистики:
-        function selectGame(game) {
-            currentGame = game;
+
+        function updateProfileInfo() {
+            if (!currentUser) return;
             
-            document.querySelectorAll('.game-card').forEach(card => {
-                card.classList.remove('active');
-                if (card.dataset.game === game) {
-                    card.classList.add('active');
+            document.getElementById('profileUsername').textContent = currentUser.username;
+            document.getElementById('profileRole').textContent = getRoleName(currentUser.role);
+            document.getElementById('profileUserId').textContent = currentUser.id.toString().padStart(6, '0');
+            document.getElementById('profileRegDate').textContent = formatDate(currentUser.registerDate);
+            document.getElementById('profileTotalGames').textContent = currentUser.totalGames || 0;
+            document.getElementById('profileWins').textContent = currentUser.wins || 0;
+            document.getElementById('profileLosses').textContent = currentUser.losses || 0;
+            document.getElementById('profileStatus').textContent = getUserStatus(currentUser);
+        }
+
+        // ========== ИГРЫ ==========
+        function playDice(choice) {
+            if (!currentUser) return;
+    
+            currentBet = roundToTwo(currentBet);
+            
+            if (currentBet > currentUser.balance) {
+                showNotification('Недостаточно средств!', 'error');
+                return;
+            }
+            
+            if (currentBet < 0.01) {
+                showNotification('Минимальная ставка 0.01 ₽', 'error');
+                return;
+            }
+            
+            // Снимаем ставку
+            currentUser.balance = roundToTwo(currentUser.balance - currentBet);
+            currentUser.totalGames = (currentUser.totalGames || 0) + 1;
+            
+            // Генерируем случайное число
+            const randomNumber = Math.random() * 100;
+            
+            // Определяем победу
+            let win = false;
+            if (choice === 'less') {
+                win = randomNumber < chance;
+            } else {
+                win = randomNumber > (100 - chance);
+            }
+            
+            let winAmount = 0;
+            
+            // Обрабатываем результат
+            if (win) {
+                const multiplier = roundToTwo(100 / chance);
+                winAmount = roundToTwo(currentBet * multiplier);
+                currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+                currentUser.wins = (currentUser.wins || 0) + 1;
+                
+                showNotification(`🎉 ПОБЕДА! +${winAmount.toFixed(2)} ₽`, 'success');
+                addToHistory('dice', true, winAmount);
+            } else {
+                currentUser.losses = (currentUser.losses || 0) + 1;
+                showNotification(`💥 ПРОИГРЫШ -${currentBet.toFixed(2)} ₽`, 'error');
+                addToHistory('dice', false, currentBet);
+            }
+            
+            updateBalance();
+            updateMultipliers();
+            saveUserData();
+        }
+
+        // MINES игра
+        function initMinesGrid() {
+            const grid = document.getElementById('minesGrid');
+            grid.innerHTML = '';
+            
+            for (let i = 0; i < 25; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'mine-cell';
+                cell.dataset.index = i;
+                cell.innerHTML = `<div class="cell-number">${i + 1}</div>`;
+                cell.addEventListener('click', () => revealMineCell(i));
+                grid.appendChild(cell);
+            }
+        }
+
+        function changeMines(delta) {
+            if (minesGame.active || !currentUser) return;
+            
+            const newCount = minesGame.minesCount + delta;
+            if (newCount >= 1 && newCount <= 19) {
+                minesGame.minesCount = newCount;
+                document.getElementById('minesCount').textContent = newCount;
+                updateMultipliers();
+            }
+        }
+
+        function startMinesGame() {
+            if (minesGame.active || !currentUser) return;
+            
+            currentBet = roundToTwo(currentBet);
+            
+            if (currentBet > currentUser.balance) {
+                showNotification('Недостаточно средств!', 'error');
+                return;
+            }
+            
+            if (currentBet < 0.01) {
+                showNotification('Минимальная ставка 0.01 ₽', 'error');
+                return;
+            }
+            
+            // Снимаем ставку
+            currentUser.balance = roundToTwo(currentUser.balance - currentBet);
+            currentUser.totalGames = (currentUser.totalGames || 0) + 1;
+            
+            // Сохраняем начальные параметры
+            minesGame.active = true;
+            minesGame.initialBet = roundToTwo(currentBet);
+            minesGame.initialMinesCount = minesGame.minesCount;
+            minesGame.revealedCells = 0;
+            minesGame.multiplier = 1.0;
+            
+            // Генерируем мины
+            minesGame.minesPositions = [];
+            const allPositions = Array.from({length: 25}, (_, i) => i);
+            for (let i = 0; i < minesGame.initialMinesCount; i++) {
+                const randomIndex = Math.floor(Math.random() * allPositions.length);
+                minesGame.minesPositions.push(allPositions.splice(randomIndex, 1)[0]);
+            }
+            
+            // Сбрасываем клетки
+            minesGame.cells = Array(25).fill().map((_, i) => ({
+                isMine: minesGame.minesPositions.includes(i),
+                isRevealed: false
+            }));
+            
+            // Обновляем интерфейс
+            document.getElementById('minesStartBtn').disabled = true;
+            document.getElementById('minesCashoutBtn').disabled = false;
+            
+            // Сбрасываем отображение клеток
+            document.querySelectorAll('.mine-cell').forEach(cell => {
+                cell.className = 'mine-cell';
+                cell.innerHTML = `<div class="cell-number">${parseInt(cell.dataset.index) + 1}</div>`;
+            });
+            
+            showNotification('🚀 Игра начата! Ищите алмазы!', 'info');
+            updateBalance();
+            updateMultipliers();
+        }
+
+        function revealMineCell(index) {
+            if (!minesGame.active || minesGame.cells[index].isRevealed || !currentUser) return;
+            
+            const cell = document.querySelector(`.mine-cell[data-index="${index}"]`);
+            minesGame.cells[index].isRevealed = true;
+            
+            if (minesGame.cells[index].isMine) {
+                // Попал на мину
+                cell.classList.add('mine');
+                cell.innerHTML = '💣';
+                gameOverMines(false);
+            } else {
+                // Безопасная клетка
+                minesGame.revealedCells++;
+                cell.classList.add('revealed');
+                
+                // Расчет множителя
+                const baseMultiplier = 0.5 + (minesGame.initialMinesCount / 25.0 * 1.0);
+                const bonusPerCell = 0.1 + (minesGame.initialMinesCount / 25.0 * 0.5);
+                minesGame.multiplier = roundToTwo(baseMultiplier + (minesGame.revealedCells * bonusPerCell));
+                
+                updateMultipliers();
+                
+                // Проверяем выигрыш
+                const safeCells = 25 - minesGame.initialMinesCount;
+                if (minesGame.revealedCells === safeCells) {
+                    gameOverMines(true);
+                }
+            }
+        }
+
+        function cashoutMines() {
+            if (!minesGame.active || minesGame.revealedCells === 0 || !currentUser) return;
+            
+            const winAmount = roundToTwo(minesGame.initialBet * minesGame.multiplier);
+            currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+            currentUser.wins = (currentUser.wins || 0) + 1;
+            
+            showNotification(`💎 Вы забрали ${winAmount.toFixed(2)} ₽ x${minesGame.multiplier.toFixed(2)}`, 'success');
+            addToHistory('mines', true, winAmount);
+            
+            gameOverMines(true, true);
+        }
+
+        function gameOverMines(won, cashout = false) {
+            minesGame.active = false;
+            
+            // Показываем все мины
+            minesGame.cells.forEach((cell, index) => {
+                if (cell.isMine && !cell.isRevealed) {
+                    const mineCell = document.querySelector(`.mine-cell[data-index="${index}"]`);
+                    mineCell.classList.add('mine');
+                    mineCell.innerHTML = '💣';
                 }
             });
             
-            document.querySelectorAll('.game-content').forEach(content => {
-                content.style.display = 'none';
-            });
-            
-            document.getElementById(`${game}Game`).style.display = 'block';
-            updateMultipliers();
-            
-            // Обновляем онлайн статистику для DOUBLE
-            if (game === 'double') {
-                updateOnlineDisplay();
+            if (!cashout) {
+                if (won) {
+                    const winAmount = roundToTwo(minesGame.initialBet * minesGame.multiplier);
+                    currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+                    currentUser.wins = (currentUser.wins || 0) + 1;
+                    showNotification(`🎉 ПОБЕДА! +${winAmount.toFixed(2)} ₽`, 'success');
+                    addToHistory('mines', true, winAmount);
+                } else {
+                    currentUser.losses = (currentUser.losses || 0) + 1;
+                    showNotification(`💥 ПРОИГРЫШ -${minesGame.initialBet.toFixed(2)} ₽`, 'error');
+                    addToHistory('mines', false, minesGame.initialBet);
+                }
             }
             
-            showNotification(`Игра "${getGameName(game)}" выбрана`, 'info');
+            // Сбрасываем интерфейс
+            document.getElementById('minesStartBtn').disabled = false;
+            document.getElementById('minesCashoutBtn').disabled = true;
+            minesGame.multiplier = 1.0;
+            
+            updateBalance();
+            updateMultipliers();
+            saveUserData();
         }
-        
-        // В функции playDoubleGame добавляем онлайн:
+
+        // CRASH игра с линией 45 градусов
+        function startCrashGame() {
+            if (crashGame.active || !currentUser) return;
+            
+            currentBet = roundToTwo(currentBet);
+            
+            if (currentBet > currentUser.balance) {
+                showNotification('Недостаточно средств!', 'error');
+                return;
+            }
+            
+            if (currentBet < 0.01) {
+                showNotification('Минимальная ставка 0.01 ₽', 'error');
+                return;
+            }
+            
+            // Снимаем ставку
+            currentUser.balance = roundToTwo(currentUser.balance - currentBet);
+            currentUser.totalGames = (currentUser.totalGames || 0) + 1;
+            
+            // Инициализируем игру
+            crashGame.active = true;
+            crashGame.cashedOut = false;
+            crashGame.gameEnded = false;
+            crashGame.currentMultiplier = 1.0;
+            crashGame.points = [];
+            
+            // Генерируем точку краша
+            crashGame.crashPoint = roundToTwo(1.0 + Math.random() * 9.0); // от 1.1 до 10.0
+            
+            // Добавляем в онлайн
+            addOnlineUser(currentUser.id, currentUser.username, 'crash', currentBet);
+            
+            // Обновляем интерфейс
+            document.getElementById('crashStartBtn').disabled = true;
+            document.getElementById('crashCashoutBtn').disabled = false;
+            
+            // Очищаем график
+            const graph = document.getElementById('crashGraph');
+            const existingLine = graph.querySelector('.graph-line-45');
+            if (existingLine) existingLine.remove();
+            
+            // Создаем новую линию графика под 45 градусов
+            const line = document.createElement('div');
+            line.className = 'graph-line-45';
+            line.style.transform = 'rotate(45deg)';
+            line.style.height = '2px';
+            graph.appendChild(line);
+            crashGame.graphLine = line;
+            
+            // Запускаем обновление игры
+            crashGame.interval = setInterval(updateCrashGame, 50);
+            
+            showNotification('🚀 Игра начата! Заберите выигрыш до краха!', 'info');
+            updateBalance();
+        }
+
+        function updateCrashGame() {
+            if (!crashGame.active || crashGame.gameEnded || !currentUser) {
+                clearInterval(crashGame.interval);
+                return;
+            }
+            
+            // Увеличиваем множитель
+            crashGame.currentMultiplier = roundToTwo(crashGame.currentMultiplier + 0.02);
+            
+            // Добавляем точку в график
+            crashGame.points.push(crashGame.currentMultiplier);
+            
+            // Обновляем отображение
+            updateMultipliers();
+            
+            // Обновляем график с линией 45 градусов
+            updateCrashGraph();
+            
+            // Проверяем краш
+            if (crashGame.currentMultiplier >= crashGame.crashPoint) {
+                if (!crashGame.cashedOut) {
+                    gameOverCrash(false);
+                }
+            }
+        }
+
+        function updateCrashGraph() {
+            const line = crashGame.graphLine;
+            if (!line) return;
+            
+            // Для линии под 45 градусов просто увеличиваем высоту
+            const height = (crashGame.currentMultiplier - 1) * 20; // Масштабируем
+            line.style.height = `${Math.min(height, 200)}px`;
+            
+            // Обновляем текущий множитель
+            document.getElementById('crashCurrentMultiplier').textContent = `x${crashGame.currentMultiplier.toFixed(2)}`;
+        }
+
+        function cashoutCrash() {
+            if (!crashGame.active || crashGame.cashedOut || crashGame.gameEnded || !currentUser) return;
+            
+            crashGame.cashedOut = true;
+            crashGame.gameEnded = true;
+            
+            const winAmount = roundToTwo(currentBet * crashGame.currentMultiplier);
+            currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+            currentUser.wins = (currentUser.wins || 0) + 1;
+            
+            showNotification(`💎 Вы забрали ${winAmount.toFixed(2)} ₽ x${crashGame.currentMultiplier.toFixed(2)}`, 'success');
+            addToHistory('crash', true, winAmount);
+            addChatMessage('Система', `${currentUser.username} забрал ${formatMoney(winAmount)} на x${crashGame.currentMultiplier.toFixed(2)} в CRASH!`, true);
+            
+            // Удаляем из онлайн CRASH
+            removeOnlineUser(currentUser.id);
+            
+            // Завершаем игру
+            gameOverCrash(true);
+        }
+
+        function gameOverCrash(cashedOut) {
+            crashGame.active = false;
+            crashGame.gameEnded = true;
+            
+            clearInterval(crashGame.interval);
+            
+            if (!cashedOut) {
+                currentUser.losses = (currentUser.losses || 0) + 1;
+                showNotification(`💥 КРАШ! Проигрыш -${currentBet.toFixed(2)} ₽`, 'error');
+                addToHistory('crash', false, currentBet);
+                addChatMessage('Система', `${currentUser.username} проиграл ${formatMoney(currentBet)} в CRASH на x${crashGame.currentMultiplier.toFixed(2)}`, true);
+                
+                // Удаляем из онлайн CRASH
+                removeOnlineUser(currentUser.id);
+            }
+            
+            // Сбрасываем интерфейс
+            document.getElementById('crashStartBtn').disabled = false;
+            document.getElementById('crashCashoutBtn').disabled = true;
+            crashGame.currentMultiplier = 1.0;
+            
+            updateBalance();
+            updateMultipliers();
+            saveUserData();
+        }
+
+        // DOUBLE игра
+        function selectColor(color) {
+            doubleGame.selectedColor = color;
+            currentColor = color;
+            
+            document.querySelectorAll('.color-card').forEach(card => {
+                card.classList.remove('selected');
+                if (card.dataset.color === color) {
+                    card.classList.add('selected');
+                }
+            });
+            
+            updateMultipliers();
+            
+            // Обновляем онлайн данные
+            if (currentUser) {
+                addOnlineUser(currentUser.id, currentUser.username, 'double', currentBet, { color: color });
+            }
+        }
+
         function playDoubleGame() {
             if (!doubleGame.selectedColor || !currentUser) {
                 showNotification('Выберите цвет!', 'error');
@@ -2653,8 +3621,7 @@
             }
             
             // Обновляем онлайн данные
-            currentColor = doubleGame.selectedColor;
-            addOnlineUser(currentUser.id, currentUser.username, currentColor, currentBet);
+            addOnlineUser(currentUser.id, currentUser.username, 'double', currentBet, { color: doubleGame.selectedColor });
             
             // Снимаем ставку
             currentUser.balance = roundToTwo(currentUser.balance - currentBet);
@@ -2674,12 +3641,6 @@
                     break;
                 }
             }
-            
-            // Сохраняем результат
-            lastDoubleResult = {
-                color: winningColor,
-                time: new Date().toLocaleTimeString('ru-RU')
-            };
             
             // Определяем результат
             const won = winningColor === doubleGame.selectedColor;
@@ -2707,37 +3668,67 @@
             saveUserData();
             saveOnlineData();
             
-            // Удаляем из онлайн после игры (через 5 секунд)
+            // Обновляем онлайн после игры
             setTimeout(() => {
                 removeOnlineUser(currentUser.id);
-                // Через 2 секунды добавляем снова с обновленной ставкой
                 setTimeout(() => {
-                    addOnlineUser(currentUser.id, currentUser.username, currentColor, currentBet);
+                    addOnlineUser(currentUser.id, currentUser.username, 'double', currentBet, { color: currentColor });
                 }, 2000);
             }, 5000);
         }
-        
-        // В функции selectColor обновляем онлайн:
-        function selectColor(color) {
-            doubleGame.selectedColor = color;
-            currentColor = color;
+
+        function animateColorSelection(winningColor) {
+            const cards = document.querySelectorAll('.color-card');
+            let count = 0;
+            const maxCount = 10;
             
-            document.querySelectorAll('.color-card').forEach(card => {
-                card.classList.remove('selected');
-                if (card.dataset.color === color) {
-                    card.classList.add('selected');
+            const animate = () => {
+                if (count >= maxCount) {
+                    // Завершаем на победном цвете
+                    cards.forEach(card => {
+                        if (card.dataset.color === winningColor) {
+                            card.style.transform = 'scale(1.1)';
+                            card.style.boxShadow = '0 0 30px rgba(52, 152, 219, 0.5)';
+                        } else {
+                            card.style.opacity = '0.5';
+                        }
+                    });
+                    
+                    setTimeout(() => {
+                        cards.forEach(card => {
+                            card.style.transform = '';
+                            card.style.boxShadow = '';
+                            card.style.opacity = '';
+                        });
+                    }, 2000);
+                    
+                    return;
                 }
-            });
+                
+                const randomColor = Object.keys(doubleGame.colors)[Math.floor(Math.random() * 4)];
+                
+                cards.forEach(card => {
+                    if (card.dataset.color === randomColor) {
+                        card.style.transform = 'scale(1.05)';
+                    } else {
+                        card.style.transform = 'scale(0.95)';
+                    }
+                });
+                
+                count++;
+                setTimeout(animate, 100);
+            };
             
-            updateMultipliers();
-            
-            // Обновляем онлайн данные
-            if (currentUser) {
-                addOnlineUser(currentUser.id, currentUser.username, color, currentBet);
-            }
+            animate();
         }
-        
-        // В функции setBet обновляем онлайн:
+
+        // ========== УПРАВЛЕНИЕ БАЛАНСОМ И СТАВКАМИ ==========
+        function updateBalance() {
+            if (!currentUser) return;
+            
+            document.getElementById('balanceAmount').textContent = formatMoney(currentUser.balance);
+        }
+
         function setBet(amount) {
             if (!currentUser) return;
             
@@ -2750,50 +3741,290 @@
             updateMultipliers();
             
             // Обновляем онлайн данные
-            if (currentUser && currentGame === 'double') {
-                addOnlineUser(currentUser.id, currentUser.username, currentColor, amount);
+            if (currentUser) {
+                const userData = onlineUsers.get(currentUser.id);
+                if (userData) {
+                    addOnlineUser(currentUser.id, currentUser.username, userData.game, amount, userData);
+                }
             }
         }
-        
-        // Добавляем обработчики для чата
-        document.addEventListener('DOMContentLoaded', function() {
-            // Инициализация базы данных
-            initDatabase();
+
+        function handleQuickBet(action) {
+            if (!currentUser) return;
             
-            // Проверяем, есть ли сохраненная сессия
-            const savedUser = getCurrentUser();
-            if (savedUser) {
-                // Обновляем данные пользователя из базы
-                const freshUser = findUserById(savedUser.id);
-                if (freshUser) {
-                    loginUser(freshUser);
-                } else {
-                    // Пользователь не найден в базе
-                    setCurrentUser(null);
-                    showAuthPanel();
-                }
-            } else {
-                showAuthPanel();
+            let newBet = currentBet;
+            
+            switch(action) {
+                case '1/2':
+                    newBet = roundToTwo(currentBet / 2);
+                    break;
+                case 'x2':
+                    newBet = roundToTwo(currentBet * 2);
+                    break;
+                case 'min':
+                    newBet = 0.01;
+                    break;
+                case 'max':
+                    newBet = roundToTwo(currentUser.balance);
+                    break;
+                case '+1':
+                    newBet = roundToTwo(currentBet + 1);
+                    break;
+                case '+10':
+                    newBet = roundToTwo(currentBet + 10);
+                    break;
+                case '+100':
+                    newBet = roundToTwo(currentBet + 100);
+                    break;
+                case 'all':
+                    newBet = roundToTwo(currentUser.balance);
+                    break;
             }
             
-            // Инициализация поля MINES
-            initMinesGrid();
+            setBet(newBet);
+        }
+
+        function setChance(value) {
+            if (value < 1) value = 1;
+            if (value > 95) value = 95;
             
-            // Назначение обработчиков событий
-            setupEventListeners();
+            chance = Math.round(value);
+            document.getElementById('chanceInput').value = chance;
+            updateMultipliers();
+        }
+
+        function updateMultipliers() {
+            if (!currentUser) return;
             
-            // Обработчики чата
-            document.getElementById('chatToggleBtn').addEventListener('click', toggleChat);
-            document.getElementById('chatCloseBtn').addEventListener('click', closeChat);
-            document.getElementById('chatSendBtn').addEventListener('click', sendChatMessage);
-            document.getElementById('chatInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') sendChatMessage();
+            // DICE множитель
+            const diceMultiplier = roundToTwo(100 / chance);
+            document.getElementById('diceMultiplier').textContent = `x${diceMultiplier.toFixed(2)}`;
+            document.getElementById('diceWinAmount').textContent = formatMoney(currentBet * diceMultiplier);
+            
+            // MINES множитель
+            const minesMultiplier = roundToTwo(minesGame.multiplier);
+            document.getElementById('minesMultiplier').textContent = `x${minesMultiplier.toFixed(2)}`;
+            document.getElementById('minesWinAmount').textContent = formatMoney(minesGame.initialBet * minesMultiplier);
+            
+            // CRASH множитель
+            const crashMultiplier = roundToTwo(crashGame.currentMultiplier);
+            document.getElementById('crashMultiplier').textContent = `x${crashMultiplier.toFixed(2)}`;
+            document.getElementById('crashWinAmount').textContent = formatMoney(currentBet * crashMultiplier);
+            document.getElementById('crashCurrentMultiplier').textContent = `x${crashMultiplier.toFixed(2)}`;
+            
+            // DOUBLE множитель
+            const doubleMultiplier = doubleGame.colors[doubleGame.selectedColor].multiplier;
+            document.getElementById('doubleMultiplier').textContent = `x${doubleMultiplier.toFixed(2)}`;
+            document.getElementById('doubleWinAmount').textContent = formatMoney(currentBet * doubleMultiplier);
+        }
+
+        function saveUserData() {
+            if (currentUser) {
+                updateUser(currentUser);
+                setCurrentUser(currentUser);
+            }
+        }
+
+        function depositBalance(amount) {
+            if (!currentUser) return;
+            
+            amount = roundToTwo(amount);
+            if (amount <= 0) {
+                showNotification('Введите положительную сумму!', 'error');
+                return;
+            }
+            
+            currentUser.balance = roundToTwo(currentUser.balance + amount);
+            updateBalance();
+            saveUserData();
+            
+            showNotification(`✅ Баланс пополнен на ${amount.toFixed(2)} ₽`, 'success');
+        }
+
+        function resetBalance() {
+            if (!currentUser) return;
+            
+            if (confirm('Вы уверены, что хотите сбросить баланс до начального значения (1000.00 ₽)?')) {
+                currentUser.balance = 1000.00;
+                updateBalance();
+                saveUserData();
+                
+                showNotification('🔄 Баланс сброшен до 1000.00 ₽', 'info');
+            }
+        }
+
+        // ========== ИСТОРИЯ И УВЕДОМЛЕНИЯ ==========
+        function addToHistory(game, won, amount) {
+            if (!currentUser) return;
+            
+            const historyItem = {
+                id: Date.now(),
+                game: game,
+                won: won,
+                amount: roundToTwo(amount),
+                bet: roundToTwo(currentBet),
+                time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+                date: new Date().toLocaleDateString('ru-RU')
+            };
+            
+            if (!currentUser.gameHistory) {
+                currentUser.gameHistory = [];
+            }
+            
+            currentUser.gameHistory.unshift(historyItem);
+            
+            if (currentUser.gameHistory.length > 50) {
+                currentUser.gameHistory = currentUser.gameHistory.slice(0, 50);
+            }
+            
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            
+            if (!currentUser || !currentUser.gameHistory || currentUser.gameHistory.length === 0) {
+                historyList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">История игр пуста</div>';
+                return;
+            }
+            
+            currentUser.gameHistory.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = `history-item ${item.won ? 'win' : 'loss'}`;
+                
+                const gameEmoji = {
+                    dice: '🎲',
+                    mines: '💣',
+                    crash: '📈',
+                    double: '🎯'
+                }[item.game] || '🎮';
+                
+                historyItem.innerHTML = `
+                    <div>
+                        <span style="font-size: 16px;">${gameEmoji}</span>
+                        <span style="margin-left: 8px; font-weight: 600;">${item.game.toUpperCase()}</span>
+                        <span style="margin-left: 8px; font-size: 12px; opacity: 0.7;">${item.time}</span>
+                    </div>
+                    <div style="font-weight: 700; color: ${item.won ? '#2ecc71' : '#e74c3c'}">
+                        ${item.won ? '+' : '-'}${item.amount.toFixed(2)} ₽
+                    </div>
+                `;
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const icon = notification.querySelector('.notification-icon');
+            const text = notification.querySelector('.notification-text');
+            
+            let iconSymbol = '🎉';
+            if (type === 'error') iconSymbol = '❌';
+            if (type === 'warning') iconSymbol = '⚠️';
+            if (type === 'success') iconSymbol = '✅';
+            if (type === 'info') iconSymbol = 'ℹ️';
+            if (type === 'admin') iconSymbol = '👑';
+            
+            icon.textContent = iconSymbol;
+            text.textContent = message;
+            
+            notification.className = 'notification';
+            notification.classList.add(type);
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // ========== НАВИГАЦИЯ ==========
+        function showSection(section) {
+            if (!currentUser) return;
+            
+            // Скрываем все панели
+            document.getElementById('gamesMenu').classList.remove('active');
+            document.getElementById('betPanel').classList.remove('active');
+            document.getElementById('gameArea').classList.remove('active');
+            document.getElementById('historyPanel').classList.remove('active');
+            document.getElementById('balanceControlPanel').classList.remove('active');
+            document.getElementById('profilePanel').classList.remove('active');
+            document.getElementById('adminPanel').classList.remove('active');
+            
+            // Обновляем активные кнопки навигации
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
             
-            // Инициализация чата
-            addChatMessage('Система', 'Добро пожаловать в чат! Общайтесь с другими игроками.', true);
-        });
-        
+            if (section === 'games') {
+                document.getElementById('navGames').classList.add('active');
+                document.getElementById('gamesMenu').classList.add('active');
+                document.getElementById('betPanel').classList.add('active');
+                document.getElementById('gameArea').classList.add('active');
+            } else if (section === 'history') {
+                document.getElementById('navHistory').classList.add('active');
+                document.getElementById('historyPanel').classList.add('active');
+            } else if (section === 'balance') {
+                document.getElementById('navBalance').classList.add('active');
+                document.getElementById('balanceControlPanel').classList.add('active');
+            } else if (section === 'profile') {
+                document.getElementById('navProfile').classList.add('active');
+                document.getElementById('profilePanel').classList.add('active');
+                updateProfileInfo();
+            } else if (section === 'admin') {
+                if (currentUser.role === 'admin' || currentUser.role === 'moder') {
+                    document.getElementById('navAdmin').classList.add('active');
+                    document.getElementById('adminPanel').classList.add('active');
+                } else {
+                    showNotification('У вас нет прав доступа к админ панели!', 'error');
+                    showSection('games');
+                }
+            }
+        }
+
+        function selectGame(game) {
+            currentGame = game;
+            
+            document.querySelectorAll('.game-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.game === game) {
+                    card.classList.add('active');
+                }
+            });
+            
+            document.querySelectorAll('.game-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            document.getElementById(`${game}Game`).style.display = 'block';
+            updateMultipliers();
+            
+            // Обновляем онлайн статистику
+            if (game === 'double' || game === 'crash') {
+                updateOnlineDisplay();
+            }
+            
+            // Обновляем онлайн данные пользователя
+            if (currentUser) {
+                const extraData = game === 'double' ? { color: doubleGame.selectedColor } : {};
+                addOnlineUser(currentUser.id, currentUser.username, game, currentBet, extraData);
+            }
+            
+            showNotification(`Игра "${getGameName(game)}" выбрана`, 'info');
+        }
+
+        function getGameName(game) {
+            const names = {
+                dice: 'DICE',
+                mines: 'MINES',
+                crash: 'CRASH',
+                double: 'DOUBLE'
+            };
+            return names[game] || game;
+        }
+
+        // ========== ЧАТ ФУНКЦИИ ==========
         function toggleChat() {
             const chatPanel = document.getElementById('chatPanel');
             const toggleBtn = document.getElementById('chatToggleBtn');
@@ -2805,7 +4036,6 @@
                 toggleBtn.classList.add('active');
                 toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
                 
-                // Сбрасываем счетчик непрочитанных
                 unreadMessages = 0;
                 updateChatBadge();
             }
@@ -2819,23 +4049,50 @@
             toggleBtn.classList.remove('active');
             toggleBtn.innerHTML = '<i class="fas fa-comment"></i>';
         }
+
+        // ========== ТЕСТОВЫЕ КОМАНДЫ ==========
+        window.addBalance = function(amount) {
+            if (currentUser) {
+                depositBalance(amount);
+            } else {
+                showNotification('Сначала войдите в аккаунт!', 'error');
+            }
+        };
+
+        window.resetGame = function() {
+            if (currentUser) {
+                currentUser.balance = 1000.00;
+                currentUser.gameHistory = [];
+                currentUser.totalGames = 0;
+                currentUser.wins = 0;
+                currentUser.losses = 0;
+                updateBalance();
+                updateHistoryDisplay();
+                updateProfileInfo();
+                saveUserData();
+                
+                showNotification('🔄 Игра сброшена к начальным значениям', 'info');
+            } else {
+                showNotification('Сначала войдите в аккаунт!', 'error');
+            }
+        };
         
-        // Все остальные функции из оригинального файла остаются БЕЗ ИЗМЕНЕНИЙ
-        // ...
-        // [Весь остальной JavaScript код из оригинального файла остается здесь без изменений]
-        // ...
-        
-        // Только добавляем эти новые функции в конец:
-        function formatMoney(amount) {
-            return roundToTwo(amount).toLocaleString('ru-RU', { 
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2 
-            }) + ' ₽';
-        }
-        
-        function roundToTwo(num) {
-            return Math.round((num + Number.EPSILON) * 100) / 100;
-        }
+        window.getAllUsers = function() {
+            const db = getDatabase();
+            console.log('Все пользователи:', db ? db.users : []);
+            return db ? db.users : [];
+        };
+
+        console.log('%c🎰 Welvura Casino v2.0 с онлайн режимом', 'color: #9b59b6; font-size: 18px; font-weight: bold;');
+        console.log('%cТестовые аккаунты:', 'color: #3498db; font-weight: bold;');
+        console.log('- Админ: admin / wowfanta');
+        console.log('- Модератор: moder / moder123');
+        console.log('- Пользователи: user1 / 123456, user2 / 123456, user3 / 123456');
+        console.log('%cОнлайн система:', 'color: #f1c40f; font-weight: bold;');
+        console.log('- Работает в DOUBLE и CRASH играх');
+        console.log('- Показывает ставки других игроков');
+        console.log('- Чат с системными сообщениями');
+        console.log('- Линия 45 градусов в CRASH');
     </script>
 </body>
 </html>

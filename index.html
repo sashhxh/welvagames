@@ -795,6 +795,184 @@
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
+        /* Панель промокодов */
+        .promocode-panel {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+
+        .promocode-panel.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .promocode-input-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .promocode-input {
+            width: 100%;
+            background: #2c3e50;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 18px;
+            text-align: center;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .promocode-input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+        }
+
+        .promocode-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--accent-purple), #8e44ad);
+            color: white;
+            margin-top: 10px;
+        }
+
+        .promocode-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
+        }
+
+        .promocode-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(52, 73, 94, 0.3);
+            border-radius: 10px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .promocode-info a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .promocode-info a:hover {
+            text-decoration: underline;
+        }
+
+        .admin-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(30, 36, 46, 0.7);
+            border-radius: 15px;
+            border: 2px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .admin-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .admin-controls {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .admin-input {
+            width: 100%;
+            background: #2c3e50;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .admin-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, var(--accent-green), #27ae60);
+            color: white;
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, var(--accent-yellow), #f39c12);
+            color: #2c3e50;
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, var(--accent-red), #c0392b);
+            color: white;
+        }
+
+        .promocode-list {
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .promocode-item {
+            padding: 8px;
+            margin-bottom: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .promocode-code {
+            font-weight: 700;
+            color: var(--accent-purple);
+        }
+
+        .promocode-amount {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .promocode-uses {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
         /* Уведомления */
         .notification {
             position: fixed;
@@ -825,6 +1003,10 @@
             border-left-color: var(--accent-yellow);
         }
 
+        .notification.info {
+            border-left-color: var(--accent-blue);
+        }
+
         .notification-icon {
             font-size: 20px;
         }
@@ -837,7 +1019,7 @@
         /* Кнопки навигации */
         .nav-buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 10px;
             margin-top: 20px;
         }
@@ -894,7 +1076,13 @@
             }
             
             .nav-buttons {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                padding: 12px 8px;
+                font-size: 12px;
             }
         }
 
@@ -984,6 +1172,58 @@
                 <div class="custom-deposit">
                     <input type="number" class="custom-deposit-input" id="customDepositInput" placeholder="Другая сумма" min="1">
                     <button class="custom-deposit-btn" id="customDepositBtn">ПОПОЛНИТЬ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель промокодов -->
+        <div class="promocode-panel" id="promocodePanel">
+            <div class="section-title">АКТИВАЦИЯ ПРОМОКОДА</div>
+            
+            <div class="promocode-input-container">
+                <input type="text" class="promocode-input" id="promocodeInput" placeholder="ВВЕДИТЕ ПРОМОКОД" maxlength="20">
+            </div>
+            
+            <button class="promocode-btn" id="activatePromocodeBtn">
+                <i class="fas fa-gift"></i> АКТИВИРОВАТЬ
+            </button>
+            
+            <div class="promocode-info">
+                <p>🔗 Получить промокод можно в нашем Telegram боте:</p>
+                <p><a href="https://t.me/welvura_casino_bot" target="_blank" id="telegramBotLink">@welvura_casino_bot</a></p>
+                <p style="margin-top: 10px; font-size: 10px; opacity: 0.7;">
+                    💡 Администратор может создавать промокоды в боте с указанием суммы и количества использований
+                </p>
+            </div>
+            
+            <!-- Админ панель (только для администратора) -->
+            <div class="admin-panel" id="adminPanel" style="display: none;">
+                <div class="admin-title">👑 АДМИН ПАНЕЛЬ</div>
+                
+                <div class="admin-controls">
+                    <input type="text" class="admin-input" id="adminCodeInput" placeholder="КОД АДМИНА">
+                    <button class="admin-btn btn-generate" id="showAdminPanelBtn">ОТКРЫТЬ ПАНЕЛЬ</button>
+                </div>
+                
+                <div id="adminControls" style="display: none;">
+                    <input type="text" class="admin-input" id="promoAmountInput" placeholder="Сумма (руб)">
+                    <input type="number" class="admin-input" id="promoUsesInput" placeholder="Кол-во использований" min="1" max="999">
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+                        <button class="admin-btn btn-generate" id="generatePromoBtn">
+                            <i class="fas fa-plus"></i> СОЗДАТЬ
+                        </button>
+                        <button class="admin-btn btn-view" id="viewPromocodesBtn">
+                            <i class="fas fa-list"></i> СПИСОК
+                        </button>
+                    </div>
+                    
+                    <input type="text" class="admin-input" id="deletePromoInput" placeholder="Промокод для удаления" style="margin-top: 10px;">
+                    <button class="admin-btn btn-delete" id="deletePromoBtn">
+                        <i class="fas fa-trash"></i> УДАЛИТЬ
+                    </button>
+                    
+                    <div class="promocode-list" id="adminPromocodeList"></div>
                 </div>
             </div>
         </div>
@@ -1157,6 +1397,9 @@
             <button class="nav-btn" id="navBalance">
                 <i class="fas fa-wallet"></i> Баланс
             </button>
+            <button class="nav-btn" id="navPromocodes">
+                <i class="fas fa-gift"></i> Промокоды
+            </button>
             <button class="nav-btn" id="navSettings">
                 <i class="fas fa-cog"></i> Настройки
             </button>
@@ -1177,8 +1420,13 @@
         let gameHistory = [];
         let currentBet = 10.00;
         let chance = 50;
+        
+        // Система промокодов
+        let promocodes = {};
+        let usedPromocodes = {};
+        const ADMIN_CODE = "WELVURA2024"; // Код для доступа к админ панели
 
-        // Состояние MINES игры (ИСПРАВЛЕНО - уменьшен множитель)
+        // Состояние MINES игры
         let minesGame = {
             active: false,
             minesCount: 3,
@@ -1214,12 +1462,10 @@
 
         // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
         
-        // Функция для округления до 2 знаков после запятой (не 4)
         function roundToTwo(num) {
             return Math.round((num + Number.EPSILON) * 100) / 100;
         }
 
-        // Функция для форматирования денег (только 2 знака)
         function formatMoney(amount) {
             return roundToTwo(amount).toLocaleString('ru-RU', { 
                 minimumFractionDigits: 2,
@@ -1229,6 +1475,16 @@
 
         function generateUserId() {
             return 'USER' + Math.floor(100000 + Math.random() * 900000);
+        }
+        
+        // Генерация промокода
+        function generatePromocode(length = 8) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
         }
 
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
@@ -1241,11 +1497,15 @@
             // Инициализация поля MINES
             initMinesGrid();
             
+            // Загрузка данных
+            loadHistory();
+            loadPromocodes();
+            
             // Назначение обработчиков событий
             setupEventListeners();
             
-            // Загрузка истории из localStorage
-            loadHistory();
+            // Создание тестовых промокодов (для демонстрации)
+            createTestPromocodes();
         });
 
         // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
@@ -1276,10 +1536,9 @@
                 setChance(parseFloat(this.value) || 50);
             });
 
-            // Поле ввода ставки (ограничиваем 2 знаками после запятой)
+            // Поле ввода ставки
             document.getElementById('betInput').addEventListener('input', function() {
                 let value = parseFloat(this.value) || 0.01;
-                // Округляем до 2 знаков
                 value = roundToTwo(value);
                 setBet(value);
             });
@@ -1312,6 +1571,7 @@
             document.getElementById('navGames').addEventListener('click', () => showSection('games'));
             document.getElementById('navHistory').addEventListener('click', () => showSection('history'));
             document.getElementById('navBalance').addEventListener('click', () => showSection('balance'));
+            document.getElementById('navPromocodes').addEventListener('click', () => showSection('promocodes'));
             document.getElementById('navSettings').addEventListener('click', () => showSection('settings'));
 
             // Кнопки управления балансом
@@ -1347,11 +1607,268 @@
                     }
                 }
             });
+            
+            // Промокоды
+            document.getElementById('activatePromocodeBtn').addEventListener('click', activatePromocode);
+            document.getElementById('promocodeInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    activatePromocode();
+                }
+            });
+            
+            // Админ панель
+            document.getElementById('showAdminPanelBtn').addEventListener('click', showAdminPanel);
+            document.getElementById('generatePromoBtn').addEventListener('click', generatePromocodeAdmin);
+            document.getElementById('viewPromocodesBtn').addEventListener('click', viewAllPromocodes);
+            document.getElementById('deletePromoBtn').addEventListener('click', deletePromocode);
+        }
+
+        // ========== СИСТЕМА ПРОМОКОДОВ ==========
+        
+        function createTestPromocodes() {
+            // Создаем несколько тестовых промокодов
+            if (!localStorage.getItem('promocodes')) {
+                const testPromocodes = {
+                    'WELCOME100': { amount: 100, maxUses: 50, used: 0, created: Date.now() },
+                    'BONUS500': { amount: 500, maxUses: 20, used: 0, created: Date.now() },
+                    'TEST50': { amount: 50, maxUses: 100, used: 0, created: Date.now() }
+                };
+                localStorage.setItem('promocodes', JSON.stringify(testPromocodes));
+                promocodes = testPromocodes;
+            }
+        }
+        
+        function loadPromocodes() {
+            try {
+                const saved = localStorage.getItem('promocodes');
+                if (saved) {
+                    promocodes = JSON.parse(saved);
+                }
+                
+                const used = localStorage.getItem('used_promocodes');
+                if (used) {
+                    usedPromocodes = JSON.parse(used);
+                }
+            } catch (e) {
+                console.log('Ошибка загрузки промокодов:', e);
+            }
+        }
+        
+        function savePromocodes() {
+            try {
+                localStorage.setItem('promocodes', JSON.stringify(promocodes));
+                localStorage.setItem('used_promocodes', JSON.stringify(usedPromocodes));
+            } catch (e) {
+                console.log('Ошибка сохранения промокодов:', e);
+            }
+        }
+        
+        function activatePromocode() {
+            const input = document.getElementById('promocodeInput');
+            const code = input.value.trim().toUpperCase();
+            
+            if (!code) {
+                showNotification('Введите промокод!', 'error');
+                return;
+            }
+            
+            // Проверяем использовал ли пользователь уже этот промокод
+            const userUsedCodes = usedPromocodes[userId] || [];
+            if (userUsedCodes.includes(code)) {
+                showNotification('Вы уже использовали этот промокод!', 'error');
+                input.value = '';
+                return;
+            }
+            
+            // Проверяем существование промокода
+            const promo = promocodes[code];
+            if (!promo) {
+                showNotification('Промокод не найден!', 'error');
+                input.value = '';
+                return;
+            }
+            
+            // Проверяем лимит использований
+            if (promo.used >= promo.maxUses) {
+                showNotification('Лимит использований промокода исчерпан!', 'error');
+                input.value = '';
+                return;
+            }
+            
+            // Активируем промокод
+            promo.used += 1;
+            
+            // Добавляем к балансу
+            const amount = roundToTwo(promo.amount);
+            userBalance = roundToTwo(userBalance + amount);
+            
+            // Сохраняем использование
+            if (!usedPromocodes[userId]) {
+                usedPromocodes[userId] = [];
+            }
+            usedPromocodes[userId].push(code);
+            
+            // Сохраняем изменения
+            savePromocodes();
+            updateBalance();
+            
+            // Показываем уведомление
+            showNotification(`🎁 Промокод активирован! +${formatMoney(amount)}`, 'success');
+            
+            // Добавляем в историю
+            addToHistory('promo', true, amount);
+            
+            // Очищаем поле ввода
+            input.value = '';
+        }
+        
+        function generatePromocodeAdmin() {
+            if (!isAdmin) {
+                showNotification('Доступ только для администратора!', 'error');
+                return;
+            }
+            
+            const amountInput = document.getElementById('promoAmountInput');
+            const usesInput = document.getElementById('promoUsesInput');
+            
+            const amount = parseFloat(amountInput.value);
+            const maxUses = parseInt(usesInput.value);
+            
+            if (!amount || amount <= 0) {
+                showNotification('Введите корректную сумму!', 'error');
+                return;
+            }
+            
+            if (!maxUses || maxUses < 1) {
+                showNotification('Введите корректное количество использований!', 'error');
+                return;
+            }
+            
+            // Генерируем промокод
+            const code = generatePromocode(10);
+            
+            // Сохраняем промокод
+            promocodes[code] = {
+                amount: amount,
+                maxUses: maxUses,
+                used: 0,
+                created: Date.now(),
+                createdBy: 'admin'
+            };
+            
+            savePromocodes();
+            
+            // Показываем промокод
+            showNotification(`✅ Промокод создан: ${code} на ${amount} ₽ (использований: ${maxUses})`, 'success');
+            
+            // Очищаем поля
+            amountInput.value = '';
+            usesInput.value = '';
+            
+            // Показываем в списке
+            viewAllPromocodes();
+        }
+        
+        function viewAllPromocodes() {
+            if (!isAdmin) {
+                showNotification('Доступ только для администратора!', 'error');
+                return;
+            }
+            
+            const list = document.getElementById('adminPromocodeList');
+            list.innerHTML = '';
+            
+            if (Object.keys(promocodes).length === 0) {
+                list.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 10px;">Нет активных промокодов</div>';
+                return;
+            }
+            
+            for (const [code, data] of Object.entries(promocodes)) {
+                const item = document.createElement('div');
+                item.className = 'promocode-item';
+                
+                const remaining = data.maxUses - data.used;
+                const createdDate = new Date(data.created).toLocaleDateString('ru-RU');
+                
+                item.innerHTML = `
+                    <div>
+                        <div class="promocode-code">${code}</div>
+                        <div class="promocode-uses">Создан: ${createdDate}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="promocode-amount">${data.amount} ₽</div>
+                        <div class="promocode-uses">${data.used}/${data.maxUses} (осталось: ${remaining})</div>
+                    </div>
+                `;
+                
+                list.appendChild(item);
+            }
+        }
+        
+        function deletePromocode() {
+            if (!isAdmin) {
+                showNotification('Доступ только для администратора!', 'error');
+                return;
+            }
+            
+            const input = document.getElementById('deletePromoInput');
+            const code = input.value.trim().toUpperCase();
+            
+            if (!code) {
+                showNotification('Введите промокод для удаления!', 'error');
+                return;
+            }
+            
+            if (!promocodes[code]) {
+                showNotification('Промокод не найден!', 'error');
+                return;
+            }
+            
+            if (confirm(`Удалить промокод ${code}?`)) {
+                delete promocodes[code];
+                savePromocodes();
+                showNotification(`🗑️ Промокод ${code} удален`, 'info');
+                input.value = '';
+                viewAllPromocodes();
+            }
+        }
+        
+        function showAdminPanel() {
+            const input = document.getElementById('adminCodeInput');
+            const code = input.value.trim();
+            
+            if (code === ADMIN_CODE) {
+                isAdmin = true;
+                document.getElementById('adminControls').style.display = 'block';
+                showNotification('👑 Админ панель активирована', 'info');
+                input.value = '';
+                viewAllPromocodes();
+            } else {
+                showNotification('Неверный код администратора!', 'error');
+            }
+        }
+        
+        // Функция для экспорта промокодов (для Telegram бота)
+        function exportPromocodes() {
+            return JSON.stringify(promocodes, null, 2);
+        }
+        
+        // Функция для импорта промокодов (из Telegram бота)
+        function importPromocodes(jsonData) {
+            try {
+                const data = JSON.parse(jsonData);
+                promocodes = data;
+                savePromocodes();
+                showNotification('Промокоды импортированы из бота', 'info');
+                return true;
+            } catch (e) {
+                showNotification('Ошибка импорта промокодов', 'error');
+                return false;
+            }
         }
 
         // ========== УПРАВЛЕНИЕ БАЛАНСОМ И СТАВКАМИ ==========
         function updateBalance() {
-            // Округляем баланс до 2 знаков
             userBalance = roundToTwo(userBalance);
             document.getElementById('balanceAmount').textContent = formatMoney(userBalance);
         }
@@ -1414,7 +1931,7 @@
             document.getElementById('diceMultiplier').textContent = `x${diceMultiplier.toFixed(2)}`;
             document.getElementById('diceWinAmount').textContent = formatMoney(currentBet * diceMultiplier);
             
-            // MINES множитель (ИСПРАВЛЕНО - уменьшены множители)
+            // MINES множитель
             const minesMultiplier = roundToTwo(minesGame.multiplier);
             document.getElementById('minesMultiplier').textContent = `x${minesMultiplier.toFixed(2)}`;
             document.getElementById('minesWinAmount').textContent = formatMoney(minesGame.initialBet * minesMultiplier);
@@ -1477,7 +1994,7 @@
             updateMultipliers();
         }
 
-        // ========== MINES ИГРА (ИСПРАВЛЕННЫЙ МНОЖИТЕЛЬ) ==========
+        // ========== MINES ИГРА ==========
         function initMinesGrid() {
             const grid = document.getElementById('minesGrid');
             grid.innerHTML = '';
@@ -1573,9 +2090,9 @@
                 minesGame.revealedCells++;
                 cell.classList.add('revealed');
                 
-                // ИСПРАВЛЕННЫЙ РАСЧЕТ МНОЖИТЕЛЯ (меньше множитель)
-                const baseMultiplier = 0.5 + (minesGame.initialMinesCount / 25.0 * 1.0); // было 1.0
-                const bonusPerCell = 0.1 + (minesGame.initialMinesCount / 25.0 * 0.5); // было 0.3
+                // Расчет множителя
+                const baseMultiplier = 0.5 + (minesGame.initialMinesCount / 25.0 * 1.0);
+                const bonusPerCell = 0.1 + (minesGame.initialMinesCount / 25.0 * 0.5);
                 minesGame.multiplier = roundToTwo(baseMultiplier + (minesGame.revealedCells * bonusPerCell));
                 
                 updateMultipliers();
@@ -1715,7 +2232,7 @@
             if (!line) return;
             
             // Рассчитываем высоту линии
-            const maxHeight = 200; // высота контейнера
+            const maxHeight = 200;
             const height = (crashGame.currentMultiplier - 1) / 9 * maxHeight;
             line.style.height = `${Math.min(height, maxHeight)}px`;
         }
@@ -1876,7 +2393,7 @@
             animate();
         }
 
-        // ========== УПРАВЛЕНИЕ БАЛАНСОМ (НОВЫЕ ФУНКЦИИ) ==========
+        // ========== УПРАВЛЕНИЕ БАЛАНСОМ ==========
         function depositBalance(amount) {
             amount = roundToTwo(amount);
             if (amount <= 0) {
@@ -1939,7 +2456,8 @@
                     dice: '🎲',
                     mines: '💣',
                     crash: '📈',
-                    double: '🎯'
+                    double: '🎯',
+                    promo: '🎁'
                 }[item.game] || '🎮';
                 
                 historyItem.innerHTML = `
@@ -2021,6 +2539,7 @@
             document.getElementById('gameArea').classList.remove('active');
             document.getElementById('historyPanel').classList.remove('active');
             document.getElementById('balanceControlPanel').classList.remove('active');
+            document.getElementById('promocodePanel').classList.remove('active');
             
             // Обновляем активные кнопки навигации
             document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -2038,6 +2557,9 @@
             } else if (section === 'balance') {
                 document.getElementById('navBalance').classList.add('active');
                 document.getElementById('balanceControlPanel').classList.add('active');
+            } else if (section === 'promocodes') {
+                document.getElementById('navPromocodes').classList.add('active');
+                document.getElementById('promocodePanel').classList.add('active');
             } else if (section === 'settings') {
                 document.getElementById('navSettings').classList.add('active');
                 // Здесь можно добавить панель настроек
@@ -2080,7 +2602,9 @@
             return names[game] || game;
         }
 
-        // ========== КОМАНДЫ ДЛЯ КОНСОЛИ (для тестирования) ==========
+        // ========== КОМАНДЫ ДЛЯ КОНСОЛИ ==========
+        let isAdmin = false;
+        
         window.addBalance = function(amount) {
             depositBalance(amount);
         };
@@ -2096,19 +2620,48 @@
             localStorage.clear();
             showNotification('🔄 Игра сброшена к начальным значениям', 'info');
         };
+        
+        window.showAdminPanel = function() {
+            document.getElementById('adminPanel').style.display = 'block';
+        };
+        
+        window.getPromocodes = function() {
+            console.log('Промокоды:', promocodes);
+            console.log('Использованные промокоды:', usedPromocodes);
+            return promocodes;
+        };
+        
+        window.createPromocode = function(amount, uses = 10) {
+            const code = generatePromocode(10);
+            promocodes[code] = {
+                amount: amount,
+                maxUses: uses,
+                used: 0,
+                created: Date.now()
+            };
+            savePromocodes();
+            console.log(`Создан промокод: ${code} на ${amount} ₽`);
+            return code;
+        };
 
         // Информация для разработчика
-        console.log('%c🎰 Welvura Casino v1.1', 'color: #3498db; font-size: 18px; font-weight: bold;');
-        console.log('%cИсправления:', 'color: #2ecc71; font-weight: bold;');
-        console.log('- Баланс округляется до 2 знаков после запятой');
-        console.log('- Уменьшены множители в игре MINES');
-        console.log('- Добавлена панель управления балансом');
-        console.log('- Добавлена кнопка сброса баланса');
+        console.log('%c🎰 Welvura Casino v1.2', 'color: #3498db; font-size: 18px; font-weight: bold;');
+        console.log('%cНовая система промокодов:', 'color: #9b59b6; font-weight: bold;');
+        console.log('- Активация промокодов через интерфейс');
+        console.log('- Админ панель для создания промокодов');
+        console.log('- Лимит использований на каждый промокод');
+        console.log('- Отслеживание использованных промокодов');
+        console.log('- Интеграция с Telegram ботом');
         console.log(`Текущий баланс: ${formatMoney(userBalance)}`);
         console.log(`User ID: ${userId}`);
         console.log('%cКоманды для тестирования:', 'color: #f1c40f; font-weight: bold;');
-        console.log('- addBalance(1000) - Пополнить баланс на 1000 ₽');
+        console.log('- addBalance(1000) - Пополнить баланс');
         console.log('- resetGame() - Сбросить игру');
+        console.log('- showAdminPanel() - Показать админ панель');
+        console.log('- getPromocodes() - Посмотреть все промокоды');
+        console.log('- createPromocode(100, 10) - Создать промокод');
+        console.log('%cАдмин код:', 'color: #e74c3c; font-weight: bold;');
+        console.log(`Код для доступа к админ панели: ${ADMIN_CODE}`);
     </script>
 </body>
 </html>

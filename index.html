@@ -41,6 +41,95 @@
             padding: 15px;
         }
 
+        /* Панели авторизации */
+        .auth-panel {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+
+        .auth-panel.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-form {
+            margin: 20px 0;
+        }
+
+        .auth-input {
+            width: 100%;
+            background: #2c3e50;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--accent-blue), #2980b9);
+            color: white;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, var(--accent-green), #27ae60);
+            color: white;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .auth-switch a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+
         /* Шапка */
         .header {
             background: linear-gradient(135deg, var(--card-bg), #252c3a);
@@ -52,6 +141,11 @@
             align-items: center;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+
+        .header.active {
+            display: flex;
         }
 
         .logo {
@@ -78,6 +172,13 @@
 
         .user-info {
             text-align: right;
+        }
+
+        .username {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--accent-blue);
         }
 
         .balance-label {
@@ -114,17 +215,6 @@
         .games-menu.active {
             display: block;
             animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .section-title {
@@ -795,8 +885,8 @@
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
-        /* Панель промокодов */
-        .promocode-panel {
+        /* Профиль */
+        .profile-panel {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 25px;
@@ -806,38 +896,37 @@
             display: none;
         }
 
-        .promocode-panel.active {
+        .profile-panel.active {
             display: block;
             animation: slideIn 0.3s ease;
         }
 
-        .promocode-input-container {
-            position: relative;
-            margin-bottom: 15px;
+        .profile-info {
+            background: rgba(44, 62, 80, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .promocode-input {
-            width: 100%;
-            background: #2c3e50;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 18px;
-            font-size: 18px;
-            text-align: center;
-            color: var(--text-primary);
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .profile-value {
             font-weight: 600;
-            transition: all 0.3s;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            color: var(--accent-blue);
         }
 
-        .promocode-input:focus {
-            outline: none;
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
-        }
-
-        .promocode-btn {
+        .logout-btn {
             width: 100%;
             padding: 18px;
             border: none;
@@ -851,126 +940,14 @@
             justify-content: center;
             gap: 10px;
             letter-spacing: 1px;
-            background: linear-gradient(135deg, var(--accent-purple), #8e44ad);
-            color: white;
-            margin-top: 10px;
-        }
-
-        .promocode-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
-        }
-
-        .promocode-info {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(52, 73, 94, 0.3);
-            border-radius: 10px;
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-align: center;
-        }
-
-        .promocode-info a {
-            color: var(--accent-blue);
-            text-decoration: none;
-        }
-
-        .promocode-info a:hover {
-            text-decoration: underline;
-        }
-
-        .admin-panel {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(30, 36, 46, 0.7);
-            border-radius: 15px;
-            border: 2px solid rgba(52, 152, 219, 0.3);
-        }
-
-        .admin-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .admin-controls {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        .admin-input {
-            width: 100%;
-            background: #2c3e50;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 14px;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-
-        .admin-btn {
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-generate {
-            background: linear-gradient(135deg, var(--accent-green), #27ae60);
-            color: white;
-        }
-
-        .btn-view {
-            background: linear-gradient(135deg, var(--accent-yellow), #f39c12);
-            color: #2c3e50;
-        }
-
-        .btn-delete {
             background: linear-gradient(135deg, var(--accent-red), #c0392b);
             color: white;
+            margin-top: 20px;
         }
 
-        .promocode-list {
-            max-height: 150px;
-            overflow-y: auto;
-            margin-top: 10px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-        }
-
-        .promocode-item {
-            padding: 8px;
-            margin-bottom: 5px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .promocode-code {
-            font-weight: 700;
-            color: var(--accent-purple);
-        }
-
-        .promocode-amount {
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        .promocode-uses {
-            font-size: 10px;
-            color: var(--text-secondary);
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
         }
 
         /* Уведомления */
@@ -1003,10 +980,6 @@
             border-left-color: var(--accent-yellow);
         }
 
-        .notification.info {
-            border-left-color: var(--accent-blue);
-        }
-
         .notification-icon {
             font-size: 20px;
         }
@@ -1019,9 +992,14 @@
         /* Кнопки навигации */
         .nav-buttons {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin-top: 20px;
+            display: none;
+        }
+
+        .nav-buttons.active {
+            display: grid;
         }
 
         .nav-btn {
@@ -1076,13 +1054,7 @@
             }
             
             .nav-buttons {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 8px;
-            }
-            
-            .nav-btn {
-                padding: 12px 8px;
-                font-size: 12px;
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -1108,21 +1080,50 @@
 </head>
 <body>
     <div class="container">
+        <!-- Панель авторизации -->
+        <div class="auth-panel active" id="authPanel">
+            <div class="section-title">ВХОД В КАЗИНО WELVURA</div>
+            
+            <div class="auth-form" id="loginForm">
+                <input type="text" class="auth-input" id="loginUsername" placeholder="ЛОГИН">
+                <input type="password" class="auth-input" id="loginPassword" placeholder="ПАРОЛЬ">
+                <button class="auth-btn btn-login" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> ВОЙТИ
+                </button>
+                <div class="auth-switch">
+                    Нет аккаунта? <a id="switchToRegister">Зарегистрироваться</a>
+                </div>
+            </div>
+
+            <div class="auth-form" id="registerForm" style="display: none;">
+                <input type="text" class="auth-input" id="registerUsername" placeholder="ПРИДУМАЙТЕ ЛОГИН" minlength="3" maxlength="20">
+                <input type="password" class="auth-input" id="registerPassword" placeholder="ПРИДУМАЙТЕ ПАРОЛЬ" minlength="4">
+                <input type="password" class="auth-input" id="registerConfirmPassword" placeholder="ПОВТОРИТЕ ПАРОЛЬ">
+                <button class="auth-btn btn-register" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> СОЗДАТЬ АККАУНТ
+                </button>
+                <div class="auth-switch">
+                    Уже есть аккаунт? <a id="switchToLogin">Войти</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Шапка -->
-        <div class="header">
+        <div class="header" id="header">
             <div class="logo">
                 <div class="logo-icon">🎰</div>
                 <div class="logo-text">WELVURA</div>
             </div>
             <div class="user-info">
+                <div class="username" id="usernameDisplay">Игрок</div>
                 <div class="balance-label">БАЛАНС</div>
-                <div class="balance-amount" id="balanceAmount">1 000.00 ₽</div>
-                <div class="user-id" id="userId">ID: 000001</div>
+                <div class="balance-amount" id="balanceAmount">0.00 ₽</div>
+                <div class="user-id" id="userId">ID: 000000</div>
             </div>
         </div>
 
         <!-- Меню выбора игры -->
-        <div class="games-menu active" id="gamesMenu">
+        <div class="games-menu" id="gamesMenu">
             <div class="section-title">ВЫБЕРИТЕ ИГРУ</div>
             <div class="games-grid">
                 <div class="game-card active" data-game="dice">
@@ -1176,56 +1177,40 @@
             </div>
         </div>
 
-        <!-- Панель промокодов -->
-        <div class="promocode-panel" id="promocodePanel">
-            <div class="section-title">АКТИВАЦИЯ ПРОМОКОДА</div>
+        <!-- Панель профиля -->
+        <div class="profile-panel" id="profilePanel">
+            <div class="section-title">ПРОФИЛЬ</div>
             
-            <div class="promocode-input-container">
-                <input type="text" class="promocode-input" id="promocodeInput" placeholder="ВВЕДИТЕ ПРОМОКОД" maxlength="20">
+            <div class="profile-info">
+                <div class="profile-item">
+                    <span class="profile-label">Логин:</span>
+                    <span class="profile-value" id="profileUsername">-</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">ID:</span>
+                    <span class="profile-value" id="profileUserId">-</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Дата регистрации:</span>
+                    <span class="profile-value" id="profileRegDate">-</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Всего игр:</span>
+                    <span class="profile-value" id="profileTotalGames">0</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Выигрыши:</span>
+                    <span class="profile-value" id="profileWins">0</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Проигрыши:</span>
+                    <span class="profile-value" id="profileLosses">0</span>
+                </div>
             </div>
-            
-            <button class="promocode-btn" id="activatePromocodeBtn">
-                <i class="fas fa-gift"></i> АКТИВИРОВАТЬ
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> ВЫЙТИ ИЗ АККАУНТА
             </button>
-            
-            <div class="promocode-info">
-                <p>🔗 Получить промокод можно в нашем Telegram боте:</p>
-                <p><a href="https://t.me/Wellwagsmbot" target="_blank" id="telegramBotLink">@welvura_casino_bot</a></p>
-                <p style="margin-top: 10px; font-size: 10px; opacity: 0.7;">
-                    💡 Администратор может создавать промокоды в боте с указанием суммы и количества использований
-                </p>
-            </div>
-            
-            <!-- Админ панель (только для администратора) -->
-            <div class="admin-panel" id="adminPanel" style="display: none;">
-                <div class="admin-title">👑 АДМИН ПАНЕЛЬ</div>
-                
-                <div class="admin-controls">
-                    <input type="text" class="admin-input" id="adminCodeInput" placeholder="КОД АДМИНА">
-                    <button class="admin-btn btn-generate" id="showAdminPanelBtn">ОТКРЫТЬ ПАНЕЛЬ</button>
-                </div>
-                
-                <div id="adminControls" style="display: none;">
-                    <input type="text" class="admin-input" id="promoAmountInput" placeholder="Сумма (руб)">
-                    <input type="number" class="admin-input" id="promoUsesInput" placeholder="Кол-во использований" min="1" max="999">
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
-                        <button class="admin-btn btn-generate" id="generatePromoBtn">
-                            <i class="fas fa-plus"></i> СОЗДАТЬ
-                        </button>
-                        <button class="admin-btn btn-view" id="viewPromocodesBtn">
-                            <i class="fas fa-list"></i> СПИСОК
-                        </button>
-                    </div>
-                    
-                    <input type="text" class="admin-input" id="deletePromoInput" placeholder="Промокод для удаления" style="margin-top: 10px;">
-                    <button class="admin-btn btn-delete" id="deletePromoBtn">
-                        <i class="fas fa-trash"></i> УДАЛИТЬ
-                    </button>
-                    
-                    <div class="promocode-list" id="adminPromocodeList"></div>
-                </div>
-            </div>
         </div>
 
         <!-- Панель ставки -->
@@ -1387,7 +1372,7 @@
         </div>
 
         <!-- Кнопки навигации -->
-        <div class="nav-buttons">
+        <div class="nav-buttons" id="navButtons">
             <button class="nav-btn active" id="navGames">
                 <i class="fas fa-gamepad"></i> Игры
             </button>
@@ -1397,11 +1382,8 @@
             <button class="nav-btn" id="navBalance">
                 <i class="fas fa-wallet"></i> Баланс
             </button>
-            <button class="nav-btn" id="navPromocodes">
-                <i class="fas fa-gift"></i> Промокоды
-            </button>
-            <button class="nav-btn" id="navSettings">
-                <i class="fas fa-cog"></i> Настройки
+            <button class="nav-btn" id="navProfile">
+                <i class="fas fa-user"></i> Профиль
             </button>
         </div>
     </div>
@@ -1413,18 +1395,116 @@
     </div>
 
     <script>
+        // ========== БАЗА ДАННЫХ (localStorage) ==========
+        const DB_NAME = 'welvura_casino_db';
+        const DB_VERSION = '1.0';
+        
+        // Инициализация базы данных
+        function initDatabase() {
+            if (!localStorage.getItem(DB_NAME)) {
+                const initialDB = {
+                    version: DB_VERSION,
+                    users: [],
+                    lastUserId: 0,
+                    lastGameId: 0
+                };
+                localStorage.setItem(DB_NAME, JSON.stringify(initialDB));
+            }
+        }
+        
+        // Получить базу данных
+        function getDatabase() {
+            const db = localStorage.getItem(DB_NAME);
+            return db ? JSON.parse(db) : null;
+        }
+        
+        // Сохранить базу данных
+        function saveDatabase(db) {
+            localStorage.setItem(DB_NAME, JSON.stringify(db));
+        }
+        
+        // Найти пользователя по логину
+        function findUserByUsername(username) {
+            const db = getDatabase();
+            if (!db || !db.users) return null;
+            
+            return db.users.find(user => user.username.toLowerCase() === username.toLowerCase());
+        }
+        
+        // Найти пользователя по ID
+        function findUserById(userId) {
+            const db = getDatabase();
+            if (!db || !db.users) return null;
+            
+            return db.users.find(user => user.id === userId);
+        }
+        
+        // Создать нового пользователя
+        function createUser(username, password) {
+            const db = getDatabase();
+            if (!db) return null;
+            
+            // Проверяем, существует ли пользователь
+            if (findUserByUsername(username)) {
+                return null;
+            }
+            
+            // Создаем нового пользователя
+            const newUserId = db.lastUserId + 1;
+            const newUser = {
+                id: newUserId,
+                username: username,
+                password: password, // В реальном приложении нужно хешировать пароль!
+                balance: 1000.00,
+                registerDate: new Date().toISOString(),
+                lastLogin: new Date().toISOString(),
+                totalGames: 0,
+                wins: 0,
+                losses: 0,
+                gameHistory: []
+            };
+            
+            db.users.push(newUser);
+            db.lastUserId = newUserId;
+            saveDatabase(db);
+            
+            return newUser;
+        }
+        
+        // Обновить данные пользователя
+        function updateUser(user) {
+            const db = getDatabase();
+            if (!db || !db.users) return false;
+            
+            const userIndex = db.users.findIndex(u => u.id === user.id);
+            if (userIndex === -1) return false;
+            
+            db.users[userIndex] = user;
+            saveDatabase(db);
+            return true;
+        }
+        
+        // Сохранить текущего пользователя в сессии
+        function setCurrentUser(user) {
+            if (user) {
+                localStorage.setItem('current_user', JSON.stringify(user));
+            } else {
+                localStorage.removeItem('current_user');
+            }
+        }
+        
+        // Получить текущего пользователя из сессии
+        function getCurrentUser() {
+            const userJson = localStorage.getItem('current_user');
+            return userJson ? JSON.parse(userJson) : null;
+        }
+
         // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
         let currentGame = 'dice';
-        let userBalance = 1000.00;
-        let userId = generateUserId();
+        let currentUser = null;
         let gameHistory = [];
         let currentBet = 10.00;
         let chance = 50;
-        
-        // Система промокодов
-        let promocodes = {};
-        let usedPromocodes = {};
-        const ADMIN_CODE = "WELVURA2024"; // Код для доступа к админ панели
 
         // Состояние MINES игры
         let minesGame = {
@@ -1473,43 +1553,64 @@
             }) + ' ₽';
         }
 
-        function generateUserId() {
-            return 'USER' + Math.floor(100000 + Math.random() * 900000);
-        }
-        
-        // Генерация промокода
-        function generatePromocode(length = 8) {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
         }
 
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
         document.addEventListener('DOMContentLoaded', function() {
-            // Установка начальных значений
-            document.getElementById('userId').textContent = `ID: ${userId}`;
-            updateBalance();
-            updateMultipliers();
+            // Инициализация базы данных
+            initDatabase();
+            
+            // Проверяем, есть ли сохраненная сессия
+            const savedUser = getCurrentUser();
+            if (savedUser) {
+                // Обновляем данные пользователя из базы
+                const freshUser = findUserById(savedUser.id);
+                if (freshUser) {
+                    loginUser(freshUser);
+                } else {
+                    // Пользователь не найден в базе
+                    setCurrentUser(null);
+                    showAuthPanel();
+                }
+            } else {
+                showAuthPanel();
+            }
             
             // Инициализация поля MINES
             initMinesGrid();
             
-            // Загрузка данных
-            loadHistory();
-            loadPromocodes();
-            
             // Назначение обработчиков событий
             setupEventListeners();
-            
-            // Создание тестовых промокодов (для демонстрации)
-            createTestPromocodes();
         });
 
         // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
         function setupEventListeners() {
+            // Переключение форм авторизации/регистрации
+            document.getElementById('switchToRegister').addEventListener('click', showRegisterForm);
+            document.getElementById('switchToLogin').addEventListener('click', showLoginForm);
+            
+            // Кнопка входа
+            document.getElementById('loginBtn').addEventListener('click', login);
+            document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') login();
+            });
+            
+            // Кнопка регистрации
+            document.getElementById('registerBtn').addEventListener('click', register);
+            document.getElementById('registerConfirmPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') register();
+            });
+            
+            // Кнопка выхода
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+
             // Выбор игры
             document.querySelectorAll('.game-card').forEach(card => {
                 card.addEventListener('click', function() {
@@ -1571,8 +1672,7 @@
             document.getElementById('navGames').addEventListener('click', () => showSection('games'));
             document.getElementById('navHistory').addEventListener('click', () => showSection('history'));
             document.getElementById('navBalance').addEventListener('click', () => showSection('balance'));
-            document.getElementById('navPromocodes').addEventListener('click', () => showSection('promocodes'));
-            document.getElementById('navSettings').addEventListener('click', () => showSection('settings'));
+            document.getElementById('navProfile').addEventListener('click', () => showSection('profile'));
 
             // Кнопки управления балансом
             document.getElementById('resetBalanceBtn').addEventListener('click', resetBalance);
@@ -1607,276 +1707,173 @@
                     }
                 }
             });
-            
-            // Промокоды
-            document.getElementById('activatePromocodeBtn').addEventListener('click', activatePromocode);
-            document.getElementById('promocodeInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    activatePromocode();
-                }
-            });
-            
-            // Админ панель
-            document.getElementById('showAdminPanelBtn').addEventListener('click', showAdminPanel);
-            document.getElementById('generatePromoBtn').addEventListener('click', generatePromocodeAdmin);
-            document.getElementById('viewPromocodesBtn').addEventListener('click', viewAllPromocodes);
-            document.getElementById('deletePromoBtn').addEventListener('click', deletePromocode);
         }
 
-        // ========== СИСТЕМА ПРОМОКОДОВ ==========
-        
-        function createTestPromocodes() {
-            // Создаем несколько тестовых промокодов
-            if (!localStorage.getItem('promocodes')) {
-                const testPromocodes = {
-                    'WELCOME100': { amount: 100, maxUses: 50, used: 0, created: Date.now() },
-                    'BONUS500': { amount: 500, maxUses: 20, used: 0, created: Date.now() },
-                    'TEST50': { amount: 50, maxUses: 100, used: 0, created: Date.now() }
-                };
-                localStorage.setItem('promocodes', JSON.stringify(testPromocodes));
-                promocodes = testPromocodes;
-            }
+        // ========== СИСТЕМА АВТОРИЗАЦИИ ==========
+        function showAuthPanel() {
+            document.getElementById('authPanel').classList.add('active');
+            document.getElementById('header').classList.remove('active');
+            document.getElementById('navButtons').classList.remove('active');
+            document.getElementById('gamesMenu').classList.remove('active');
+            document.getElementById('betPanel').classList.remove('active');
+            document.getElementById('gameArea').classList.remove('active');
+            document.getElementById('historyPanel').classList.remove('active');
+            document.getElementById('balanceControlPanel').classList.remove('active');
+            document.getElementById('profilePanel').classList.remove('active');
+            
+            currentUser = null;
         }
-        
-        function loadPromocodes() {
-            try {
-                const saved = localStorage.getItem('promocodes');
-                if (saved) {
-                    promocodes = JSON.parse(saved);
-                }
-                
-                const used = localStorage.getItem('used_promocodes');
-                if (used) {
-                    usedPromocodes = JSON.parse(used);
-                }
-            } catch (e) {
-                console.log('Ошибка загрузки промокодов:', e);
-            }
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginUsername').focus();
         }
-        
-        function savePromocodes() {
-            try {
-                localStorage.setItem('promocodes', JSON.stringify(promocodes));
-                localStorage.setItem('used_promocodes', JSON.stringify(usedPromocodes));
-            } catch (e) {
-                console.log('Ошибка сохранения промокодов:', e);
-            }
+
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('registerUsername').focus();
         }
-        
-        function activatePromocode() {
-            const input = document.getElementById('promocodeInput');
-            const code = input.value.trim().toUpperCase();
+
+        function login() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
             
-            if (!code) {
-                showNotification('Введите промокод!', 'error');
+            if (!username || !password) {
+                showNotification('Заполните все поля!', 'error');
                 return;
             }
             
-            // Проверяем использовал ли пользователь уже этот промокод
-            const userUsedCodes = usedPromocodes[userId] || [];
-            if (userUsedCodes.includes(code)) {
-                showNotification('Вы уже использовали этот промокод!', 'error');
-                input.value = '';
+            // Ищем пользователя
+            const user = findUserByUsername(username);
+            
+            if (!user) {
+                showNotification('Пользователь не найден!', 'error');
                 return;
             }
             
-            // Проверяем существование промокода
-            const promo = promocodes[code];
-            if (!promo) {
-                showNotification('Промокод не найден!', 'error');
-                input.value = '';
+            if (user.password !== password) {
+                showNotification('Неверный пароль!', 'error');
                 return;
             }
             
-            // Проверяем лимит использований
-            if (promo.used >= promo.maxUses) {
-                showNotification('Лимит использований промокода исчерпан!', 'error');
-                input.value = '';
+            // Обновляем время последнего входа
+            user.lastLogin = new Date().toISOString();
+            updateUser(user);
+            
+            // Входим в систему
+            loginUser(user);
+            
+            showNotification(`Добро пожаловать, ${user.username}!`, 'success');
+        }
+
+        function register() {
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (!username || !password || !confirmPassword) {
+                showNotification('Заполните все поля!', 'error');
                 return;
             }
             
-            // Активируем промокод
-            promo.used += 1;
-            
-            // Добавляем к балансу
-            const amount = roundToTwo(promo.amount);
-            userBalance = roundToTwo(userBalance + amount);
-            
-            // Сохраняем использование
-            if (!usedPromocodes[userId]) {
-                usedPromocodes[userId] = [];
+            if (username.length < 3) {
+                showNotification('Логин должен быть не менее 3 символов!', 'error');
+                return;
             }
-            usedPromocodes[userId].push(code);
             
-            // Сохраняем изменения
-            savePromocodes();
+            if (password.length < 4) {
+                showNotification('Пароль должен быть не менее 4 символов!', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification('Пароли не совпадают!', 'error');
+                return;
+            }
+            
+            // Проверяем, существует ли пользователь
+            if (findUserByUsername(username)) {
+                showNotification('Пользователь с таким логином уже существует!', 'error');
+                return;
+            }
+            
+            // Создаем нового пользователя
+            const newUser = createUser(username, password);
+            
+            if (!newUser) {
+                showNotification('Ошибка при создании аккаунта!', 'error');
+                return;
+            }
+            
+            // Входим в систему
+            loginUser(newUser);
+            
+            showNotification(`Аккаунт успешно создан! Добро пожаловать, ${username}!`, 'success');
+            showLoginForm();
+        }
+
+        function loginUser(user) {
+            currentUser = user;
+            setCurrentUser(user);
+            
+            // Обновляем интерфейс
+            document.getElementById('authPanel').classList.remove('active');
+            document.getElementById('header').classList.add('active');
+            document.getElementById('navButtons').classList.add('active');
+            
+            document.getElementById('usernameDisplay').textContent = user.username;
+            document.getElementById('userId').textContent = `ID: ${user.id.toString().padStart(6, '0')}`;
+            
+            // Обновляем профиль
+            updateProfileInfo();
+            
+            // Загружаем историю игр
+            gameHistory = user.gameHistory || [];
+            updateHistoryDisplay();
+            
+            // Обновляем баланс
             updateBalance();
+            updateMultipliers();
             
-            // Показываем уведомление
-            showNotification(`🎁 Промокод активирован! +${formatMoney(amount)}`, 'success');
-            
-            // Добавляем в историю
-            addToHistory('promo', true, amount);
-            
-            // Очищаем поле ввода
-            input.value = '';
+            // Показываем игры
+            showSection('games');
         }
-        
-        function generatePromocodeAdmin() {
-            if (!isAdmin) {
-                showNotification('Доступ только для администратора!', 'error');
-                return;
-            }
-            
-            const amountInput = document.getElementById('promoAmountInput');
-            const usesInput = document.getElementById('promoUsesInput');
-            
-            const amount = parseFloat(amountInput.value);
-            const maxUses = parseInt(usesInput.value);
-            
-            if (!amount || amount <= 0) {
-                showNotification('Введите корректную сумму!', 'error');
-                return;
-            }
-            
-            if (!maxUses || maxUses < 1) {
-                showNotification('Введите корректное количество использований!', 'error');
-                return;
-            }
-            
-            // Генерируем промокод
-            const code = generatePromocode(10);
-            
-            // Сохраняем промокод
-            promocodes[code] = {
-                amount: amount,
-                maxUses: maxUses,
-                used: 0,
-                created: Date.now(),
-                createdBy: 'admin'
-            };
-            
-            savePromocodes();
-            
-            // Показываем промокод
-            showNotification(`✅ Промокод создан: ${code} на ${amount} ₽ (использований: ${maxUses})`, 'success');
-            
-            // Очищаем поля
-            amountInput.value = '';
-            usesInput.value = '';
-            
-            // Показываем в списке
-            viewAllPromocodes();
-        }
-        
-        function viewAllPromocodes() {
-            if (!isAdmin) {
-                showNotification('Доступ только для администратора!', 'error');
-                return;
-            }
-            
-            const list = document.getElementById('adminPromocodeList');
-            list.innerHTML = '';
-            
-            if (Object.keys(promocodes).length === 0) {
-                list.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 10px;">Нет активных промокодов</div>';
-                return;
-            }
-            
-            for (const [code, data] of Object.entries(promocodes)) {
-                const item = document.createElement('div');
-                item.className = 'promocode-item';
-                
-                const remaining = data.maxUses - data.used;
-                const createdDate = new Date(data.created).toLocaleDateString('ru-RU');
-                
-                item.innerHTML = `
-                    <div>
-                        <div class="promocode-code">${code}</div>
-                        <div class="promocode-uses">Создан: ${createdDate}</div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div class="promocode-amount">${data.amount} ₽</div>
-                        <div class="promocode-uses">${data.used}/${data.maxUses} (осталось: ${remaining})</div>
-                    </div>
-                `;
-                
-                list.appendChild(item);
+
+        function logout() {
+            if (confirm('Вы уверены, что хотите выйти из аккаунта?')) {
+                setCurrentUser(null);
+                currentUser = null;
+                showAuthPanel();
+                showNotification('Вы вышли из аккаунта', 'info');
             }
         }
-        
-        function deletePromocode() {
-            if (!isAdmin) {
-                showNotification('Доступ только для администратора!', 'error');
-                return;
-            }
+
+        function updateProfileInfo() {
+            if (!currentUser) return;
             
-            const input = document.getElementById('deletePromoInput');
-            const code = input.value.trim().toUpperCase();
-            
-            if (!code) {
-                showNotification('Введите промокод для удаления!', 'error');
-                return;
-            }
-            
-            if (!promocodes[code]) {
-                showNotification('Промокод не найден!', 'error');
-                return;
-            }
-            
-            if (confirm(`Удалить промокод ${code}?`)) {
-                delete promocodes[code];
-                savePromocodes();
-                showNotification(`🗑️ Промокод ${code} удален`, 'info');
-                input.value = '';
-                viewAllPromocodes();
-            }
-        }
-        
-        function showAdminPanel() {
-            const input = document.getElementById('adminCodeInput');
-            const code = input.value.trim();
-            
-            if (code === ADMIN_CODE) {
-                isAdmin = true;
-                document.getElementById('adminControls').style.display = 'block';
-                showNotification('👑 Админ панель активирована', 'info');
-                input.value = '';
-                viewAllPromocodes();
-            } else {
-                showNotification('Неверный код администратора!', 'error');
-            }
-        }
-        
-        // Функция для экспорта промокодов (для Telegram бота)
-        function exportPromocodes() {
-            return JSON.stringify(promocodes, null, 2);
-        }
-        
-        // Функция для импорта промокодов (из Telegram бота)
-        function importPromocodes(jsonData) {
-            try {
-                const data = JSON.parse(jsonData);
-                promocodes = data;
-                savePromocodes();
-                showNotification('Промокоды импортированы из бота', 'info');
-                return true;
-            } catch (e) {
-                showNotification('Ошибка импорта промокодов', 'error');
-                return false;
-            }
+            document.getElementById('profileUsername').textContent = currentUser.username;
+            document.getElementById('profileUserId').textContent = currentUser.id.toString().padStart(6, '0');
+            document.getElementById('profileRegDate').textContent = formatDate(currentUser.registerDate);
+            document.getElementById('profileTotalGames').textContent = currentUser.totalGames || 0;
+            document.getElementById('profileWins').textContent = currentUser.wins || 0;
+            document.getElementById('profileLosses').textContent = currentUser.losses || 0;
         }
 
         // ========== УПРАВЛЕНИЕ БАЛАНСОМ И СТАВКАМИ ==========
         function updateBalance() {
-            userBalance = roundToTwo(userBalance);
-            document.getElementById('balanceAmount').textContent = formatMoney(userBalance);
+            if (!currentUser) return;
+            
+            document.getElementById('balanceAmount').textContent = formatMoney(currentUser.balance);
         }
 
         function setBet(amount) {
+            if (!currentUser) return;
+            
             amount = roundToTwo(amount);
             if (amount < 0.01) amount = 0.01;
-            if (amount > userBalance) amount = roundToTwo(userBalance);
+            if (amount > currentUser.balance) amount = roundToTwo(currentUser.balance);
             
             currentBet = amount;
             document.getElementById('betInput').value = amount.toFixed(2);
@@ -1884,6 +1881,8 @@
         }
 
         function handleQuickBet(action) {
+            if (!currentUser) return;
+            
             let newBet = currentBet;
             
             switch(action) {
@@ -1897,7 +1896,7 @@
                     newBet = 0.01;
                     break;
                 case 'max':
-                    newBet = roundToTwo(userBalance);
+                    newBet = roundToTwo(currentUser.balance);
                     break;
                 case '+1':
                     newBet = roundToTwo(currentBet + 1);
@@ -1909,7 +1908,7 @@
                     newBet = roundToTwo(currentBet + 100);
                     break;
                 case 'all':
-                    newBet = roundToTwo(userBalance);
+                    newBet = roundToTwo(currentUser.balance);
                     break;
             }
             
@@ -1926,6 +1925,8 @@
         }
 
         function updateMultipliers() {
+            if (!currentUser) return;
+            
             // DICE множитель
             const diceMultiplier = roundToTwo(100 / chance);
             document.getElementById('diceMultiplier').textContent = `x${diceMultiplier.toFixed(2)}`;
@@ -1948,53 +1949,67 @@
             document.getElementById('doubleWinAmount').textContent = formatMoney(currentBet * doubleMultiplier);
         }
 
-        // ========== DICE ИГРА ==========
-        function playDice(choice) {
-            currentBet = roundToTwo(currentBet);
-            
-            if (currentBet > userBalance) {
-                showNotification('Недостаточно средств!', 'error');
-                return;
+        function saveUserData() {
+            if (currentUser) {
+                updateUser(currentUser);
+                setCurrentUser(currentUser);
             }
-            
-            if (currentBet < 0.01) {
-                showNotification('Минимальная ставка 0.01 ₽', 'error');
-                return;
-            }
-            
-            // Снимаем ставку
-            userBalance = roundToTwo(userBalance - currentBet);
-            updateBalance();
-            
-            // Генерируем случайное число
-            const randomNumber = Math.random() * 100;
-            
-            // Определяем победу
-            let win = false;
-            if (choice === 'less') {
-                win = randomNumber < chance;
-            } else {
-                win = randomNumber > (100 - chance);
-            }
-            
-            // Обрабатываем результат
-            if (win) {
-                const multiplier = roundToTwo(100 / chance);
-                const winAmount = roundToTwo(currentBet * multiplier);
-                userBalance = roundToTwo(userBalance + winAmount);
-                
-                showNotification(`🎉 ПОБЕДА! +${winAmount.toFixed(2)} ₽`, 'success');
-                addToHistory('dice', true, winAmount);
-            } else {
-                showNotification(`💥 ПРОИГРЫШ -${currentBet.toFixed(2)} ₽`, 'error');
-                addToHistory('dice', false, currentBet);
-            }
-            
-            updateBalance();
-            updateMultipliers();
         }
 
-        // ========== MINES ИГРА ==========
+        // ========== ИГРЫ ==========
+        function playDice(choice) {
+            if (!currentUser) return;
+    
+    currentBet = roundToTwo(currentBet);
+    
+    if (currentBet > currentUser.balance) {
+        showNotification('Недостаточно средств!', 'error');
+        return;
+    }
+    
+    if (currentBet < 0.01) {
+        showNotification('Минимальная ставка 0.01 ₽', 'error');
+        return;
+    }
+    
+    // Снимаем ставку
+    currentUser.balance = roundToTwo(currentUser.balance - currentBet);
+    currentUser.totalGames = (currentUser.totalGames || 0) + 1;
+    
+    // Генерируем случайное число
+    const randomNumber = Math.random() * 100;
+    
+    // Определяем победу
+    let win = false;
+    if (choice === 'less') {
+        win = randomNumber < chance;
+    } else {
+        win = randomNumber > (100 - chance);
+    }
+    
+    let winAmount = 0;
+    
+    // Обрабатываем результат
+    if (win) {
+        const multiplier = roundToTwo(100 / chance);
+        winAmount = roundToTwo(currentBet * multiplier);
+        currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+        currentUser.wins = (currentUser.wins || 0) + 1; // <-- ДОБАВЬ ЭТУ СТРОКУ
+        
+        showNotification(`🎉 ПОБЕДА! +${winAmount.toFixed(2)} ₽`, 'success');
+        addToHistory('dice', true, winAmount); // <-- ИСТОРИЯ ПОСЛЕ
+    } else {
+        currentUser.losses = (currentUser.losses || 0) + 1; // <-- ДОБАВЬ ЭТУ СТРОКУ
+        showNotification(`💥 ПРОИГРЫШ -${currentBet.toFixed(2)} ₽`, 'error');
+        addToHistory('dice', false, currentBet); // <-- ИСТОРИЯ ПОСЛЕ
+    }
+    
+    updateBalance();
+    updateMultipliers();
+    saveUserData();
+}
+
+        // MINES игра
         function initMinesGrid() {
             const grid = document.getElementById('minesGrid');
             grid.innerHTML = '';
@@ -2010,7 +2025,7 @@
         }
 
         function changeMines(delta) {
-            if (minesGame.active) return;
+            if (minesGame.active || !currentUser) return;
             
             const newCount = minesGame.minesCount + delta;
             if (newCount >= 1 && newCount <= 19) {
@@ -2021,11 +2036,11 @@
         }
 
         function startMinesGame() {
-            if (minesGame.active) return;
+            if (minesGame.active || !currentUser) return;
             
             currentBet = roundToTwo(currentBet);
             
-            if (currentBet > userBalance) {
+            if (currentBet > currentUser.balance) {
                 showNotification('Недостаточно средств!', 'error');
                 return;
             }
@@ -2036,8 +2051,8 @@
             }
             
             // Снимаем ставку
-            userBalance = roundToTwo(userBalance - currentBet);
-            updateBalance();
+            currentUser.balance = roundToTwo(currentUser.balance - currentBet);
+            currentUser.totalGames = (currentUser.totalGames || 0) + 1;
             
             // Сохраняем начальные параметры
             minesGame.active = true;
@@ -2071,11 +2086,12 @@
             });
             
             showNotification('🚀 Игра начата! Ищите алмазы!', 'info');
+            updateBalance();
             updateMultipliers();
         }
 
         function revealMineCell(index) {
-            if (!minesGame.active || minesGame.cells[index].isRevealed) return;
+            if (!minesGame.active || minesGame.cells[index].isRevealed || !currentUser) return;
             
             const cell = document.querySelector(`.mine-cell[data-index="${index}"]`);
             minesGame.cells[index].isRevealed = true;
@@ -2106,10 +2122,11 @@
         }
 
         function cashoutMines() {
-            if (!minesGame.active || minesGame.revealedCells === 0) return;
+            if (!minesGame.active || minesGame.revealedCells === 0 || !currentUser) return;
             
             const winAmount = roundToTwo(minesGame.initialBet * minesGame.multiplier);
-            userBalance = roundToTwo(userBalance + winAmount);
+            currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+            currentUser.wins = (currentUser.wins || 0) + 1;
             
             showNotification(`💎 Вы забрали ${winAmount.toFixed(2)} ₽ x${minesGame.multiplier.toFixed(2)}`, 'success');
             addToHistory('mines', true, winAmount);
@@ -2132,10 +2149,12 @@
             if (!cashout) {
                 if (won) {
                     const winAmount = roundToTwo(minesGame.initialBet * minesGame.multiplier);
-                    userBalance = roundToTwo(userBalance + winAmount);
+                    currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+                    currentUser.wins = (currentUser.wins || 0) + 1;
                     showNotification(`🎉 ПОБЕДА! +${winAmount.toFixed(2)} ₽`, 'success');
                     addToHistory('mines', true, winAmount);
                 } else {
+                    currentUser.losses = (currentUser.losses || 0) + 1;
                     showNotification(`💥 ПРОИГРЫШ -${minesGame.initialBet.toFixed(2)} ₽`, 'error');
                     addToHistory('mines', false, minesGame.initialBet);
                 }
@@ -2148,15 +2167,16 @@
             
             updateBalance();
             updateMultipliers();
+            saveUserData();
         }
 
-        // ========== CRASH ИГРА ==========
+        // CRASH игра
         function startCrashGame() {
-            if (crashGame.active) return;
+            if (crashGame.active || !currentUser) return;
             
             currentBet = roundToTwo(currentBet);
             
-            if (currentBet > userBalance) {
+            if (currentBet > currentUser.balance) {
                 showNotification('Недостаточно средств!', 'error');
                 return;
             }
@@ -2167,8 +2187,8 @@
             }
             
             // Снимаем ставку
-            userBalance = roundToTwo(userBalance - currentBet);
-            updateBalance();
+            currentUser.balance = roundToTwo(currentUser.balance - currentBet);
+            currentUser.totalGames = (currentUser.totalGames || 0) + 1;
             
             // Инициализируем игру
             crashGame.active = true;
@@ -2199,10 +2219,11 @@
             crashGame.interval = setInterval(updateCrashGame, 50);
             
             showNotification('🚀 Игра начата! Заберите выигрыш до краха!', 'info');
+            updateBalance();
         }
 
         function updateCrashGame() {
-            if (!crashGame.active || crashGame.gameEnded) {
+            if (!crashGame.active || crashGame.gameEnded || !currentUser) {
                 clearInterval(crashGame.interval);
                 return;
             }
@@ -2231,20 +2252,20 @@
             const line = document.querySelector('.graph-line');
             if (!line) return;
             
-            // Рассчитываем высоту линии
             const maxHeight = 200;
             const height = (crashGame.currentMultiplier - 1) / 9 * maxHeight;
             line.style.height = `${Math.min(height, maxHeight)}px`;
         }
 
         function cashoutCrash() {
-            if (!crashGame.active || crashGame.cashedOut || crashGame.gameEnded) return;
+            if (!crashGame.active || crashGame.cashedOut || crashGame.gameEnded || !currentUser) return;
             
             crashGame.cashedOut = true;
             crashGame.gameEnded = true;
             
             const winAmount = roundToTwo(currentBet * crashGame.currentMultiplier);
-            userBalance = roundToTwo(userBalance + winAmount);
+            currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+            currentUser.wins = (currentUser.wins || 0) + 1;
             
             showNotification(`💎 Вы забрали ${winAmount.toFixed(2)} ₽ x${crashGame.currentMultiplier.toFixed(2)}`, 'success');
             addToHistory('crash', true, winAmount);
@@ -2260,6 +2281,7 @@
             clearInterval(crashGame.interval);
             
             if (!cashedOut) {
+                currentUser.losses = (currentUser.losses || 0) + 1;
                 showNotification(`💥 КРАШ! Проигрыш -${currentBet.toFixed(2)} ₽`, 'error');
                 addToHistory('crash', false, currentBet);
             }
@@ -2271,13 +2293,13 @@
             
             updateBalance();
             updateMultipliers();
+            saveUserData();
         }
 
-        // ========== DOUBLE ИГРА ==========
+        // DOUBLE игра
         function selectColor(color) {
             doubleGame.selectedColor = color;
             
-            // Обновляем отображение выбранного цвета
             document.querySelectorAll('.color-card').forEach(card => {
                 card.classList.remove('selected');
                 if (card.dataset.color === color) {
@@ -2289,14 +2311,14 @@
         }
 
         function playDoubleGame() {
-            if (!doubleGame.selectedColor) {
+            if (!doubleGame.selectedColor || !currentUser) {
                 showNotification('Выберите цвет!', 'error');
                 return;
             }
             
             currentBet = roundToTwo(currentBet);
             
-            if (currentBet > userBalance) {
+            if (currentBet > currentUser.balance) {
                 showNotification('Недостаточно средств!', 'error');
                 return;
             }
@@ -2307,8 +2329,8 @@
             }
             
             // Снимаем ставку
-            userBalance = roundToTwo(userBalance - currentBet);
-            updateBalance();
+            currentUser.balance = roundToTwo(currentUser.balance - currentBet);
+            currentUser.totalGames = (currentUser.totalGames || 0) + 1;
             
             // Определяем выигрышный цвет на основе шансов
             const totalChance = Object.values(doubleGame.colors).reduce((sum, color) => sum + color.chance, 0);
@@ -2327,23 +2349,26 @@
             
             // Определяем результат
             const won = winningColor === doubleGame.selectedColor;
+            let winAmount = 0;
             
             if (won) {
                 const multiplier = doubleGame.colors[winningColor].multiplier;
-                const winAmount = roundToTwo(currentBet * multiplier);
-                userBalance = roundToTwo(userBalance + winAmount);
+                winAmount = roundToTwo(currentBet * multiplier);
+                currentUser.balance = roundToTwo(currentUser.balance + winAmount);
+                currentUser.wins = (currentUser.wins || 0) + 1;
                 
                 showNotification(`🎉 ПОБЕДА! Выпал ${winningColor.toUpperCase()}! +${winAmount.toFixed(2)} ₽ x${multiplier}`, 'success');
-                addToHistory('double', true, winAmount);
             } else {
+                currentUser.losses = (currentUser.losses || 0) + 1;
                 showNotification(`💥 ПРОИГРЫШ! Выпал ${winningColor.toUpperCase()}! -${currentBet.toFixed(2)} ₽`, 'error');
-                addToHistory('double', false, currentBet);
             }
             
+            addToHistory('double', won, winAmount || currentBet);
             updateBalance();
             
             // Анимация выбора
             animateColorSelection(winningColor);
+            saveUserData();
         }
 
         function animateColorSelection(winningColor) {
@@ -2363,7 +2388,6 @@
                         }
                     });
                     
-                    // Через 2 секунды сбрасываем анимацию
                     setTimeout(() => {
                         cards.forEach(card => {
                             card.style.transform = '';
@@ -2375,7 +2399,6 @@
                     return;
                 }
                 
-                // Мигаем случайным цветом
                 const randomColor = Object.keys(doubleGame.colors)[Math.floor(Math.random() * 4)];
                 
                 cards.forEach(card => {
@@ -2395,24 +2418,28 @@
 
         // ========== УПРАВЛЕНИЕ БАЛАНСОМ ==========
         function depositBalance(amount) {
+            if (!currentUser) return;
+            
             amount = roundToTwo(amount);
             if (amount <= 0) {
                 showNotification('Введите положительную сумму!', 'error');
                 return;
             }
             
-            userBalance = roundToTwo(userBalance + amount);
+            currentUser.balance = roundToTwo(currentUser.balance + amount);
             updateBalance();
-            saveHistory();
+            saveUserData();
             
             showNotification(`✅ Баланс пополнен на ${amount.toFixed(2)} ₽`, 'success');
         }
 
         function resetBalance() {
+            if (!currentUser) return;
+            
             if (confirm('Вы уверены, что хотите сбросить баланс до начального значения (1000.00 ₽)?')) {
-                userBalance = 1000.00;
+                currentUser.balance = 1000.00;
                 updateBalance();
-                saveHistory();
+                saveUserData();
                 
                 showNotification('🔄 Баланс сброшен до 1000.00 ₽', 'info');
             }
@@ -2420,6 +2447,8 @@
 
         // ========== ИСТОРИЯ И УВЕДОМЛЕНИЯ ==========
         function addToHistory(game, won, amount) {
+            if (!currentUser) return;
+            
             const historyItem = {
                 id: Date.now(),
                 game: game,
@@ -2430,15 +2459,17 @@
                 date: new Date().toLocaleDateString('ru-RU')
             };
             
-            gameHistory.unshift(historyItem);
-            
-            // Ограничиваем историю 20 записями
-            if (gameHistory.length > 20) {
-                gameHistory = gameHistory.slice(0, 20);
+            // Добавляем в историю пользователя
+            if (!currentUser.gameHistory) {
+                currentUser.gameHistory = [];
             }
             
-            // Сохраняем в localStorage
-            saveHistory();
+            currentUser.gameHistory.unshift(historyItem);
+            
+            // Ограничиваем историю 50 записями
+            if (currentUser.gameHistory.length > 50) {
+                currentUser.gameHistory = currentUser.gameHistory.slice(0, 50);
+            }
             
             // Обновляем отображение истории
             updateHistoryDisplay();
@@ -2448,7 +2479,12 @@
             const historyList = document.getElementById('historyList');
             historyList.innerHTML = '';
             
-            gameHistory.forEach(item => {
+            if (!currentUser || !currentUser.gameHistory || currentUser.gameHistory.length === 0) {
+                historyList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">История игр пуста</div>';
+                return;
+            }
+            
+            currentUser.gameHistory.forEach(item => {
                 const historyItem = document.createElement('div');
                 historyItem.className = `history-item ${item.won ? 'win' : 'loss'}`;
                 
@@ -2456,8 +2492,7 @@
                     dice: '🎲',
                     mines: '💣',
                     crash: '📈',
-                    double: '🎯',
-                    promo: '🎁'
+                    double: '🎯'
                 }[item.game] || '🎮';
                 
                 historyItem.innerHTML = `
@@ -2475,40 +2510,11 @@
             });
         }
 
-        function saveHistory() {
-            try {
-                localStorage.setItem('casino_history', JSON.stringify(gameHistory));
-                localStorage.setItem('casino_balance', userBalance.toString());
-            } catch (e) {
-                console.log('Не удалось сохранить историю:', e);
-            }
-        }
-
-        function loadHistory() {
-            try {
-                const savedHistory = localStorage.getItem('casino_history');
-                const savedBalance = localStorage.getItem('casino_balance');
-                
-                if (savedHistory) {
-                    gameHistory = JSON.parse(savedHistory);
-                    updateHistoryDisplay();
-                }
-                
-                if (savedBalance) {
-                    userBalance = roundToTwo(parseFloat(savedBalance));
-                    updateBalance();
-                }
-            } catch (e) {
-                console.log('Не удалось загрузить историю:', e);
-            }
-        }
-
         function showNotification(message, type = 'info') {
             const notification = document.getElementById('notification');
             const icon = notification.querySelector('.notification-icon');
             const text = notification.querySelector('.notification-text');
             
-            // Устанавливаем иконку и текст
             let iconSymbol = '🎉';
             if (type === 'error') iconSymbol = '❌';
             if (type === 'warning') iconSymbol = '⚠️';
@@ -2518,14 +2524,10 @@
             icon.textContent = iconSymbol;
             text.textContent = message;
             
-            // Устанавливаем класс типа
             notification.className = 'notification';
             notification.classList.add(type);
-            
-            // Показываем уведомление
             notification.classList.add('show');
             
-            // Скрываем через 3 секунды
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
@@ -2533,13 +2535,15 @@
 
         // ========== НАВИГАЦИЯ ==========
         function showSection(section) {
+            if (!currentUser) return;
+            
             // Скрываем все панели
             document.getElementById('gamesMenu').classList.remove('active');
             document.getElementById('betPanel').classList.remove('active');
             document.getElementById('gameArea').classList.remove('active');
             document.getElementById('historyPanel').classList.remove('active');
             document.getElementById('balanceControlPanel').classList.remove('active');
-            document.getElementById('promocodePanel').classList.remove('active');
+            document.getElementById('profilePanel').classList.remove('active');
             
             // Обновляем активные кнопки навигации
             document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -2557,21 +2561,16 @@
             } else if (section === 'balance') {
                 document.getElementById('navBalance').classList.add('active');
                 document.getElementById('balanceControlPanel').classList.add('active');
-            } else if (section === 'promocodes') {
-                document.getElementById('navPromocodes').classList.add('active');
-                document.getElementById('promocodePanel').classList.add('active');
-            } else if (section === 'settings') {
-                document.getElementById('navSettings').classList.add('active');
-                // Здесь можно добавить панель настроек
-                showNotification('Раздел настроек в разработке', 'info');
-                showSection('games'); // Возвращаемся к играм
+            } else if (section === 'profile') {
+                document.getElementById('navProfile').classList.add('active');
+                document.getElementById('profilePanel').classList.add('active');
+                updateProfileInfo();
             }
         }
 
         function selectGame(game) {
             currentGame = game;
             
-            // Обновление активной карточки игры
             document.querySelectorAll('.game-card').forEach(card => {
                 card.classList.remove('active');
                 if (card.dataset.game === game) {
@@ -2579,14 +2578,11 @@
                 }
             });
             
-            // Показать соответствующую игру
             document.querySelectorAll('.game-content').forEach(content => {
                 content.style.display = 'none';
             });
             
             document.getElementById(`${game}Game`).style.display = 'block';
-            
-            // Обновить множители
             updateMultipliers();
             
             showNotification(`Игра "${getGameName(game)}" выбрана`, 'info');
@@ -2603,65 +2599,50 @@
         }
 
         // ========== КОМАНДЫ ДЛЯ КОНСОЛИ ==========
-        let isAdmin = false;
-        
         window.addBalance = function(amount) {
-            depositBalance(amount);
+            if (currentUser) {
+                depositBalance(amount);
+            } else {
+                showNotification('Сначала войдите в аккаунт!', 'error');
+            }
         };
 
         window.resetGame = function() {
-            userBalance = 1000.00;
-            gameHistory = [];
-            minesGame.multiplier = 1.0;
-            crashGame.currentMultiplier = 1.0;
-            updateBalance();
-            updateHistoryDisplay();
-            updateMultipliers();
-            localStorage.clear();
-            showNotification('🔄 Игра сброшена к начальным значениям', 'info');
+            if (currentUser) {
+                currentUser.balance = 1000.00;
+                currentUser.gameHistory = [];
+                currentUser.totalGames = 0;
+                currentUser.wins = 0;
+                currentUser.losses = 0;
+                updateBalance();
+                updateHistoryDisplay();
+                updateProfileInfo();
+                saveUserData();
+                
+                showNotification('🔄 Игра сброшена к начальным значениям', 'info');
+            } else {
+                showNotification('Сначала войдите в аккаунт!', 'error');
+            }
         };
         
-        window.showAdminPanel = function() {
-            document.getElementById('adminPanel').style.display = 'block';
-        };
-        
-        window.getPromocodes = function() {
-            console.log('Промокоды:', promocodes);
-            console.log('Использованные промокоды:', usedPromocodes);
-            return promocodes;
-        };
-        
-        window.createPromocode = function(amount, uses = 10) {
-            const code = generatePromocode(10);
-            promocodes[code] = {
-                amount: amount,
-                maxUses: uses,
-                used: 0,
-                created: Date.now()
-            };
-            savePromocodes();
-            console.log(`Создан промокод: ${code} на ${amount} ₽`);
-            return code;
+        window.getAllUsers = function() {
+            const db = getDatabase();
+            console.log('Все пользователи:', db ? db.users : []);
+            return db ? db.users : [];
         };
 
         // Информация для разработчика
-        console.log('%c🎰 Welvura Casino v1.2', 'color: #3498db; font-size: 18px; font-weight: bold;');
-        console.log('%cНовая система промокодов:', 'color: #9b59b6; font-weight: bold;');
-        console.log('- Активация промокодов через интерфейс');
-        console.log('- Админ панель для создания промокодов');
-        console.log('- Лимит использований на каждый промокод');
-        console.log('- Отслеживание использованных промокодов');
-        console.log('- Интеграция с Telegram ботом');
-        console.log(`Текущий баланс: ${formatMoney(userBalance)}`);
-        console.log(`User ID: ${userId}`);
+        console.log('%c🎰 Welvura Casino v2.0', 'color: #3498db; font-size: 18px; font-weight: bold;');
+        console.log('%cНовая система аккаунтов:', 'color: #2ecc71; font-weight: bold;');
+        console.log('- Регистрация и авторизация');
+        console.log('- База данных пользователей (localStorage)');
+        console.log('- История игр для каждого пользователя');
+        console.log('- Статистика игр в профиле');
+        console.log('- Автоматическое сохранение прогресса');
         console.log('%cКоманды для тестирования:', 'color: #f1c40f; font-weight: bold;');
         console.log('- addBalance(1000) - Пополнить баланс');
         console.log('- resetGame() - Сбросить игру');
-        console.log('- showAdminPanel() - Показать админ панель');
-        console.log('- getPromocodes() - Посмотреть все промокоды');
-        console.log('- createPromocode(100, 10) - Создать промокод');
-        console.log('%cАдмин код:', 'color: #e74c3c; font-weight: bold;');
-        console.log(`Код для доступа к админ панели: ${ADMIN_CODE}`);
+        console.log('- getAllUsers() - Посмотреть всех пользователей');
     </script>
 </body>
 </html>

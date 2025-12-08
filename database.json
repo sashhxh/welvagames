@@ -1,0 +1,16 @@
+{
+  "users": {},
+  "crashGames": [],
+  "activeCrashGame": null,
+  "chatMessages": [],
+  "bets": [],
+  "transactions": [],
+  "system": {
+    "maintenance": false,
+    "minBet": 0.01,
+    "maxBet": 10000,
+    "version": "1.0.0",
+    "onlinePlayers": 0
+  },
+  "lastUpdated": "2024-12-08T10:00:00.000Z"
+}
